@@ -4,8 +4,8 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-// import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule1 } from './shared/shared.module';
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -68,7 +68,7 @@ const APP_CONTAINERS = [
     AvatarModule,
     BreadcrumbModule,
     FooterModule,
-    // ToasterModule,
+    SharedModule1,
     DropdownModule,
     GridModule,
     HeaderModule,
@@ -93,7 +93,7 @@ const APP_CONTAINERS = [
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true
    })

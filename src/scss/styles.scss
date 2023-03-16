@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // If you want to override variables do it here
 @import "variables";
-
+@import 'ngx-toastr/toastr';
 $enable-ltr: false;
 $enable-rtl: true;
 
@@ -10,7 +10,6 @@ $enable-rtl: true;
 
 // Import Chart.js custom tooltips styles
 @import "@coreui/chartjs/scss/coreui-chartjs";
-
 // perfect scrollbar theming for use with [perfectScrollbar] directive
 //@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 

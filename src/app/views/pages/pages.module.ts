@@ -9,9 +9,8 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { IconModule } from '@coreui/icons-angular';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SharedModule1 } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +18,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     Page404Component,
     Page500Component,
-    
   ],
   imports: [
     CommonModule,
     ToasterModule,
+    SharedModule1,
     PagesRoutingModule,
     CardModule,
     ButtonModule,
@@ -31,14 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     IconModule,
     FormModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-      closeButton: true
-   })
-
+    BrowserAnimationsModule
   ],
   providers: [
     ToasterService

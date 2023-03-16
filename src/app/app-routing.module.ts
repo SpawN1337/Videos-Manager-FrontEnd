@@ -14,6 +14,7 @@ const routes: Routes = [
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  
   {path: 'login',component: LoginComponent}, 
   {
     path: '',
@@ -23,6 +24,7 @@ const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {path: 'register',component: RegisterComponent}, 
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -73,8 +75,9 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-    ]
+    ],
   },
+
   {
     path: '404',
     component: Page404Component,
