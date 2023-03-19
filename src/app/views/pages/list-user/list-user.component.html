@@ -1,0 +1,69 @@
+<div class="animated fadeIn text-center " dir="rtl">
+    <div class="card">
+        <div class="card-header">
+            قائمة المستخدمين
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4 offset-md-8">
+
+                    <!-- </div> -->
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" cIcon name="cil-zoom" size="lg"><svg cIcon name="cil-zoom" size="lg"></svg></span>
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="بحث. . . . . . . ." />
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">
+                            الإسم
+                        </th>
+                        <th style="width: 20%">
+                            اللقب
+                        </th>
+                        <th style="width: 10%">
+                            إسم المستخدم
+                        </th>
+                        <th style="width: 10%">
+                            الوظيفة
+                        </th>
+                        <th style="width: 20%">
+                            تحيين
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data ">
+                        <td>{{item.firstname}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.role}}</td>
+                        <td>
+                            <button type="button" [routerLink]="['/updateUser',item._id]" class="btn btn-info">تحيين<svg
+                                    cIcon name="cil-settings" size="lg"></svg>
+                            </button> &nbsp;
+                            <button class="btn btn-danger" (click)="onDelete(item._id)">حذف<svg cIcon name="cil-trash"
+                                    size="lg"></svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="float-right">
+                <button type="button" [routerLink]="['/register']" class="btn btn-success"> إضافة مستخدم<svg cIcon
+                        name="cil-user-follow" size="lg"></svg>
+                </button>
+            </div>
+        </div>
+    </div>

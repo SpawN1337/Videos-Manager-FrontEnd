@@ -8,12 +8,14 @@ import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import {  ReactiveFormsModule } from '@angular/forms';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule1 } from 'src/app/shared/shared.module';
-
+import { UpdateUserComponent } from './update-user/update-user.component';
+import { ListUserComponent } from './list-user/list-user.component';
 @NgModule({
   declarations: [
+    UpdateUserComponent,
+    ListUserComponent,
     LoginComponent,
     RegisterComponent,
     Page404Component,
@@ -21,7 +23,6 @@ import { SharedModule1 } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
-    ToasterModule,
     SharedModule1,
     PagesRoutingModule,
     CardModule,
@@ -33,7 +34,6 @@ import { SharedModule1 } from 'src/app/shared/shared.module';
     BrowserAnimationsModule
   ],
   providers: [
-    ToasterService
   ]
 })
 export class PagesModule {

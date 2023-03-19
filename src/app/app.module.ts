@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule1 } from './shared/shared.module';
-
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
@@ -49,6 +48,8 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { ListUserComponent } from './views/pages/list-user/list-user.component';
+import { UpdateUserComponent } from './views/pages/update-user/update-user.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -61,7 +62,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS],
+  declarations: [AppComponent, ...APP_CONTAINERS,],
   imports: [
     BrowserModule,
     AppRoutingModule,

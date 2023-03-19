@@ -14,6 +14,11 @@
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
       <c-nav-item>
+        <a cNavLink routerLink="/users" routerLinkActive="active">
+          قائمة المستخدمين
+        </a>
+      </c-nav-item>
+      <c-nav-item>
         <a cNavLink routerLink="/dashboard" routerLinkActive="active">
           Dashboard
         </a>
@@ -50,10 +55,10 @@
     </c-header-nav>
 
   </c-container>
-  <c-header-divider></c-header-divider>
+  <!-- <c-header-divider></c-header-divider>
   <c-container [fluid]="true">
     <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
-  </c-container>
+  </c-container> -->
 </ng-container>
 <!--</c-header>-->
 
@@ -70,8 +75,7 @@
         cTextColor="primary"
         shape="rounded-1"
         size="md"
-        src="./assets/img/avatars/8.jpg"
-        status="success"
+        src="./assets/img/avatars/taf.png"
       >
       </c-avatar>
     </button>

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ToasterConfig, ToasterService } from 'angular2-toaster';
 import { navItems } from './_nav';
 
 @Component({
@@ -9,14 +8,9 @@ import { navItems } from './_nav';
 export class DefaultLayoutComponent {
 
   public navItems = navItems;
-  public toasterconfig: ToasterConfig =
-  new ToasterConfig({
-    tapToDismiss: true,
-    timeout: 5000
-  });
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };
 
-  constructor( private toasterService: ToasterService) {}
+  constructor( ) {}
 }

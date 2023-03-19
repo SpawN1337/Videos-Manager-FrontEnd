@@ -6,6 +6,8 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { ListUserComponent } from './views/pages/list-user/list-user.component';
+import { UpdateUserComponent } from './views/pages/update-user/update-user.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
     },
     children: [
       {path: 'register',component: RegisterComponent}, 
+      {path: 'users',component: ListUserComponent}, 
+      {path: 'updateUser/:id',component: UpdateUserComponent}, 
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -99,14 +103,13 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
-  {path: '**', redirectTo: 'dashboard'}
+  // {
+  //   path: 'register',
+  //   component: RegisterComponent,
+  //   data: {
+  //     title: 'Register Page'
+  //   }
+  // },
 ];
 
 @NgModule({
