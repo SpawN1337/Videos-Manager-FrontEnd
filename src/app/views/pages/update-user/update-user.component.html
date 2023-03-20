@@ -79,7 +79,7 @@
                         </div>
                         <br >
                         <div class="form-group">
-                            <button class="btn btn-primary mr-1" (click)="updateuser()">تسجيل</button> &nbsp;
+                            <button class="btn btn-primary mr-1" (click)="updateuser()" [disabled]="f['accept'].invalid">تسجيل</button> &nbsp;
                             <button class="btn btn-success mr-1" type="submit" [disabled]="userForm.valid">تحقق</button>
                             &nbsp;
                             <button class="btn btn-danger" type="reset" [disabled]="userForm.pristine && !submitted"

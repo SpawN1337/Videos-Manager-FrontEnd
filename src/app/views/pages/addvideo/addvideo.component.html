@@ -1,0 +1,60 @@
+<!-- <h1>Create Profile</h1>
+<hr />
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div>
+    <input formControlName="name" type="text" placeholder="Enter name..." />
+  </div>
+  <div>
+    <input (change)="onFileSelect($event)" type="file" />
+  </div>
+  <div *ngIf="imageData">
+    <img [src]="imageData" [alt]="form.value.name" />
+  </div>
+  <div>
+    <button type="submit">Create profile</button>
+  </div>
+</form> -->
+<div class="container ">
+  <div class="row " dir="rtl">
+
+    <form [formGroup]="form" (submit)="onSubmit()">
+<br>
+      <!-- Progress Bar -->
+
+      <!-- <div class="progress form-group" *ngIf="imageService.percentDone">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+          [style.width.%]="imageService.percentDone">
+        </div>
+      </div> -->
+      
+      <!-- File Input -->
+      
+      <div class="form-group">
+        <input type="file" (change)="onFileSelect($event)">
+      </div>
+
+      <!-- Name -->
+      <div class="form-group input-group-lg">
+        <input class="form-control" placeholder="الشبكات" formControlName="name">
+      </div>
+
+    
+
+      <!-- Image Preview -->
+      <div class="form-group">
+        <div class="imageData" *ngIf="imageData">
+          <img [src]="imageData" [alt]="form.value.name" width="280">
+        </div>
+      </div>
+
+
+
+      <!-- Submit -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة صورة للشبكات</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
