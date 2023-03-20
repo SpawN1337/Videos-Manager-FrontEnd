@@ -1,44 +1,22 @@
-<!-- <h1>Create Profile</h1>
-<hr />
-<form [formGroup]="form" (submit)="onSubmit()">
-  <div>
-    <input formControlName="name" type="text" placeholder="Enter name..." />
-  </div>
-  <div>
-    <input (change)="onFileSelect($event)" type="file" />
-  </div>
-  <div *ngIf="imageData">
-    <img [src]="imageData" [alt]="form.value.name" />
-  </div>
-  <div>
-    <button type="submit">Create profile</button>
-  </div>
-</form> -->
+<c-container>
+  <c-row class="justify-content-center">
+    <c-col md="8">
 <div class="container ">
   <div class="row " dir="rtl">
 
     <form [formGroup]="form" (submit)="onSubmit()">
-<br>
-      <!-- Progress Bar -->
-
-      <!-- <div class="progress form-group" *ngIf="imageService.percentDone">
-        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-          [style.width.%]="imageService.percentDone">
-        </div>
-      </div> -->
-      
-      <!-- File Input -->
-      
-      <div class="form-group">
-        <input type="file" (change)="onFileSelect($event)">
-      </div>
+      <br>
 
       <!-- Name -->
       <div class="form-group input-group-lg">
-        <input class="form-control" placeholder="الشبكات" formControlName="name">
+        <input class="form-control" placeholder="العنوان" formControlName="name">
+      </div>
+      <div>
+        <h3>المفاتيح</h3>
+        <tag-input [(ngModel)]="items" [editable]="true" (onTagEdited)="onTagEdited($event)">
+        </tag-input>
       </div>
 
-    
 
       <!-- Image Preview -->
       <div class="form-group">
@@ -46,9 +24,16 @@
           <img [src]="imageData" [alt]="form.value.name" width="280">
         </div>
       </div>
-
-
-
+      <!-- File Input -->
+      <div class="form-group">
+        <input type="file" (change)="onFileSelect($event)">
+      </div>
+      <br>
+      <!-- Progress Bar -->
+      <div class="progress form-group" *ngIf="percentDone">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="percentDone">
+        </div>
+      </div>
       <!-- Submit -->
       <div class="form-group">
         <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة صورة للشبكات</button>
@@ -58,3 +43,6 @@
 
   </div>
 </div>
+</c-col>
+</c-row>
+</c-container>

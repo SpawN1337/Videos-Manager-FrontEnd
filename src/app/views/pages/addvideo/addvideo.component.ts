@@ -18,6 +18,9 @@ export class AddvideoComponent implements OnInit {
   formErrors: any;
   imageData: string;
   percentDone: any = 0;
+  items = ['Javascript', 'Typescript'];
+
+    inputText = 'text';
 
   constructor(private imageService: ImageService,
     private toasterService: ToastrService,
@@ -47,6 +50,9 @@ export class AddvideoComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+  public onTagEdited(item : any) {
+    console.log('tag edited: current value is ' + item);
+}
 
   onSubmit() {
     this.imageService.addImage(this.form.value.name, this.form.value.image).subscribe((event: HttpEvent<any>) => {
