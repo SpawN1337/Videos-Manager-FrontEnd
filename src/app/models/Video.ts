@@ -1,4 +1,4 @@
-export interface Image {
+export interface Video {
     _id: string;
     name: string;
     imagePath: string;

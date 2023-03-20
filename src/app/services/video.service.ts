@@ -3,7 +3,7 @@ import { HttpClient,HttpErrorResponse } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { Observable } from 'rxjs';
-import { Image } from "../models/Image";
+import { Video } from "../models/Video";
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
@@ -11,30 +11,30 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: "root",
 })
-export class  ImageService {
+export class  VideoService {
 
-  private images: Image[] = [];
-  private images$ = new Subject<Image[]>();
+  private videos: Video[] = [];
+  private videos$ = new Subject<Video[]>();
   baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
-  allIimages() {
-    return this.http.get(`${this.baseUrl}/getimages`).pipe(
+  allVideos() {
+    return this.http.get(`${this.baseUrl}/getvideos`).pipe(
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError)
     )
   }
-  getImages() {
+  getVideos() {
     this.http
-      .get<{ images: Image[] }>(`${this.baseUrl}/getimages`)
+      .get<{ videos: Video[] }>(`${this.baseUrl}/getvideos`)
       .pipe(
-        map((imageData) => {
-          return imageData.images;
+        map((videoData) => {
+          return videoData.videos;
         })
       )
-      .subscribe((images) => {
-        this.images = images;
-        this.images$.next(this.images);
+      .subscribe((videos) => {
+        this.videos = videos;
+        this.videos$.next(this.videos);
       });
   }
   private handleError(error: HttpErrorResponse) {
@@ -52,31 +52,31 @@ export class  ImageService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-  getImagesStream() {
-    return this.images$.asObservable();
+  getVideosStream() {
+    return this.videos$.asObservable();
   }
 
-  addImage(name: string,image: File): Observable<any> {
-    var imageData: any = new FormData();
-    imageData.append("name", name);
-    imageData.append("image", image, name);
+  addVideo(name: string,video: File): Observable<any> {
+    var videoData: any = new FormData();
+    videoData.append("name", name);
+    videoData.append("video", video, name);
 
-    return this.http.post<{ image: Image }>(`${this.baseUrl}/upload`, imageData, {
+    return this.http.post<{ video: Video }>(`${this.baseUrl}/upload`, videoData, {
       reportProgress: true,
       observe: 'events'
     })
   }
 
-  removeImage(id: any) {
+  removeVideo(id: any) {
     return this.http.delete(`${this.baseUrl}/removeupload/${id}`)
   }
 
 
-  getImage(id: any) {
+  getVideo(id: any) {
     return this.http.get(`${this.baseUrl}/getupload/${id}`)
   }
 
-  updateImage(id: any, body: any) {
+  updateVideo(id: any, body: any) {
     return this.http.put(`${this.baseUrl}/updateupload/${id}`, body)
 
   }
