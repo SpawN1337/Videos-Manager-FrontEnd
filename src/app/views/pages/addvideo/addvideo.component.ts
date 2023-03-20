@@ -18,28 +18,29 @@ export class AddvideoComponent implements OnInit {
   formErrors: any;
   videoData: string;
   percentDone: any = 0;
-  items = ['Javascript', 'Typescript'];
+  // items: any;
 
-    inputText = 'text';
+  inputText = 'text';
 
   constructor(private VideoService: VideoService,
     private toasterService: ToastrService,
     // public vf: ValidationFormsService,
-    private router: Router,) { 
-      // this.formErrors = this.vf.errorMessages;
-     }
+    private router: Router,) {
+    // this.formErrors = this.vf.errorMessages;
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null),
+      tags: new FormControl(null),
       video: new FormControl(null),
     });
   }
   get f() { return this.form.controls; }
 
   onFileSelect(event: Event) {
-   
-    const file = (event.target as HTMLInputElement)?.files?.[0] ;
+
+    const file = (event.target as HTMLInputElement)?.files?.[0];
     this.form.patchValue({ video: file });
     const allowedMimeTypes = ['video/mp4', 'video/mpeg ', 'video/3gpp'];
     if (file && allowedMimeTypes.includes(file.type)) {
@@ -50,12 +51,18 @@ export class AddvideoComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  public onTagEdited(item : any) {
+  public onTagEdited(item: any) {
     console.log('tag edited: current value is ' + item);
-}
+  }
 
   onSubmit() {
-    this.VideoService.addVideo(this.form.value.name, this.form.value.video).subscribe((event: HttpEvent<any>) => {
+    console.log("test",this.form.value.tag)
+    let tag = [];
+    for (let index = 0 ; index < this.form.value.tags.length ; index++){
+      tag.push(this.form.value.tags[index].value)
+    }
+    console.log("test",tag)
+    this.VideoService.addVideo(this.form.value.name, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           console.log('Request has been made!');
@@ -64,10 +71,10 @@ export class AddvideoComponent implements OnInit {
           console.log('Response header has been received!');
           break;
         case HttpEventType.UploadProgress:
-          if(event?.loaded && event?.total ) {
+          if (event?.loaded && event?.total) {
             this.percentDone = Math.round(event.loaded / event.total * 100)
           }
-          console.log( this.percentDone);
+          console.log(this.percentDone);
           console.log(`Uploaded! ${this.percentDone}%`);
           break;
         case HttpEventType.Response:
@@ -75,8 +82,8 @@ export class AddvideoComponent implements OnInit {
           this.percentDone = false;
           this.router.navigate(['users']);
           this.toasterService.success('تمت الإضافة بنجاح');
-          
-        }
+
+      }
     })
 
 

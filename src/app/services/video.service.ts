@@ -56,10 +56,11 @@ export class  VideoService {
     return this.videos$.asObservable();
   }
 
-  addVideo(name: string,video: File): Observable<any> {
+  addVideo(name: string,tag: string[],video: File): Observable<any> {
     var videoData: any = new FormData();
     videoData.append("name", name);
-    videoData.append("video", video, name);
+    videoData.append("tag", tag);
+    videoData.append("video", video, name,tag);
 
     return this.http.post<{ video: Video }>(`${this.baseUrl}/upload`, videoData, {
       reportProgress: true,

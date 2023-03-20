@@ -13,7 +13,7 @@
       </div>
       <div>
         <h3>المفاتيح</h3>
-        <tag-input [(ngModel)]="items" [editable]="true" (onTagEdited)="onTagEdited($event)">
+        <tag-input formControlName="tags"  [editable]="true" (onTagEdited)="onTagEdited($event)">
         </tag-input>
       </div>
 
