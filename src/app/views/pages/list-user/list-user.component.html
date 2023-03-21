@@ -23,6 +23,9 @@
                 <thead>
                     <tr>
                         <th style="width: 20%">
+                            الرتبة
+                        </th>
+                        <th style="width: 20%">
                             الإسم
                         </th>
                         <th style="width: 20%">
@@ -41,6 +44,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of data ">
+                        <td>{{item.grade?.grade}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
                         <td>{{item.username}}</td>

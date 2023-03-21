@@ -6,6 +6,18 @@
           <c-card-body class="p-4">
             <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()" class="needs-validation">
               <div class="form-group">
+                <label class="col-form-label" for="grade" dir="rtl">الرتبة</label>
+                <select ng-model="selectedItem" class="form-control" placeholder="الرتبة" autocomplete="الرتبة"
+                  formControlName="grade" required
+                  [ngClass]="{ 'is-invalid': submitted && f.grade.errors, 'is-valid': f.grade.touched && !f.grade.errors }">
+                  <option *ngFor="let grade of myGrade" value="{{grade._id}}">{{grade.grade}}</option>
+                </select>
+
+                <div *ngIf="submitted && f['grade'].errors" class="invalid-feedback">
+                  <div *ngIf="f['grade'].errors['required']">قم باختيار الرتبة</div>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="col-form-label" for="firstname">الإسم</label>
                 <input class="form-control" id="firstname" type="text" formControlName="firstname"
                   placeholder="الإسم" autocomplete="given-name" required autofocus

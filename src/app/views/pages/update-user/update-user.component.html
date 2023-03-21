@@ -8,6 +8,19 @@
                 <div class="col-md-6">
 
                     <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()" class="needs-validation">
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="grade" dir="rtl">الرتبة</label>
+                            <select ng-model="selectedItem" class="form-control" placeholder="الرتبة"
+                                autocomplete="الرتبة" formControlName="grade" required
+                                [ngClass]="{ 'is-invalid': submitted && f['grade'].errors, 'is-valid': f['grade'].touched && !f['grade'].errors }">
+                                <option *ngFor="let grade of myGrade" value="{{grade._id}}">{{grade.grade}}</option>
+                            </select>
+
+                            <div *ngIf="submitted && f['grade'].errors" class="invalid-feedback">
+                                <div *ngIf="f['grade'].errors['required']">قم باختيار الرتبة</div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-form-label" for="firstname">الإسم</label>
                             <input class="form-control" id="firstname" type="text" formControlName="firstname"
@@ -65,7 +78,7 @@
                             </div>
 
                         </div>
-                        <br >
+                        <br>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="accept" formControlName="accept"
@@ -77,9 +90,10 @@
                                 </div>
                             </div>
                         </div>
-                        <br >
+                        <br>
                         <div class="form-group">
-                            <button class="btn btn-primary mr-1" (click)="updateuser()" [disabled]="f['accept'].invalid">تسجيل</button> &nbsp;
+                            <button class="btn btn-primary mr-1" (click)="updateuser()"
+                                [disabled]="f['accept'].invalid">تسجيل</button> &nbsp;
                             <button class="btn btn-success mr-1" type="submit" [disabled]="userForm.valid">تحقق</button>
                             &nbsp;
                             <button class="btn btn-danger" type="reset" [disabled]="userForm.pristine && !submitted"

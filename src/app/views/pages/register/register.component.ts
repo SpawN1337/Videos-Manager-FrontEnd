@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthserviceService } from '../../../services/authservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidationService } from '../../../validators/validation.service';
-
+import { GradeService } from '../../../services/grade.service';
 /** passwords must match - custom validator */
 export class CustomValidators {
   static MatchValidator(source: string, target: string): ValidatorFn {
@@ -27,7 +27,9 @@ export class CustomValidators {
 export class RegisterComponent {
   submitted = false;
   formErrors: any;
+  myGrade: any;
   registerForm = new FormGroup({
+    grade: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
@@ -36,8 +38,8 @@ export class RegisterComponent {
     confirmPassword: new FormControl(''),
     role: new FormControl('', Validators.required),
     accept: new FormControl(false, Validators.requiredTrue)
-  }, 
-  [CustomValidators.MatchValidator('password', 'confirmPassword')]
+  },
+    [CustomValidators.MatchValidator('password', 'confirmPassword')]
   );
 
   get passwordMatchError() {
@@ -49,35 +51,26 @@ export class RegisterComponent {
 
   constructor(private toasterService: ToastrService,
     private router: Router,
+    private gradeservice: GradeService,
     private authservice: AuthserviceService,
     public vf: ValidationService) {
     this.formErrors = this.vf.errorMessages;
   }
   ngOnInit(): void {
-    //   this.registerForm = new FormGroup({
-    //     firstName: new FormControl('', Validators.required),
-    //     lastName: new FormControl('', Validators.required),
-    //     email: new FormControl('', Validators.required),
-    //     password: new FormControl('', Validators.required),
-    //     repassword: new FormControl('')
-    //   },
-    //     {
-    //       validators: [matchingPasswords]
-    //     }
-    //   );
+    this.allGrades()
   }
 
   get f() { return this.registerForm.controls; }
 
   register() {
     this.submitted = true;
-       if (this.registerForm.invalid) {
+    if (this.registerForm.invalid) {
       return
     };
     //with Services
     this.authservice.register(this.registerForm.value).subscribe((response: any) => {
       this.toasterService.success('Success Login', response.message);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/users']);
     },
       (error: any) => {
         this.toasterService.error('Error', error.error.message);
@@ -86,7 +79,15 @@ export class RegisterComponent {
     );
   }
 
-
+  allGrades() {
+    this.gradeservice.allGrades().subscribe((response: any) => {
+      this.myGrade = response
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
   onReset() {
 
     this.submitted = false;

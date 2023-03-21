@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-
+import { AirCraftService } from '../../../services/airCraft.service';
 @Component({
   selector: 'app-addvideo',
   templateUrl: './addvideo.component.html',
@@ -15,6 +15,7 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 export class AddvideoComponent implements OnInit {
   form: FormGroup;
   video: Video;
+  myAirCrafts: any;
   formErrors: any;
   videoData: string;
   percentDone: any = 0;
@@ -24,13 +25,16 @@ export class AddvideoComponent implements OnInit {
 
   constructor(private VideoService: VideoService,
     private toasterService: ToastrService,
+    private AirCraftService: AirCraftService,
     // public vf: ValidationFormsService,
     private router: Router,) {
     // this.formErrors = this.vf.errorMessages;
   }
 
   ngOnInit(): void {
+    this.allAirCrafts()
     this.form = new FormGroup({
+      aircraft: new FormControl(null),
       name: new FormControl(null),
       tags: new FormControl(null),
       video: new FormControl(null),
@@ -38,6 +42,16 @@ export class AddvideoComponent implements OnInit {
   }
   get f() { return this.form.controls; }
 
+  
+  allAirCrafts() {
+    this.AirCraftService.allAirCrafts().subscribe((response: any) => {
+      this.myAirCrafts = response
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
   onFileSelect(event: Event) {
 
     const file = (event.target as HTMLInputElement)?.files?.[0];
@@ -56,13 +70,11 @@ export class AddvideoComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("test",this.form.value.tag)
     let tag = [];
     for (let index = 0 ; index < this.form.value.tags.length ; index++){
       tag.push(this.form.value.tags[index].value)
     }
-    console.log("test",tag)
-    this.VideoService.addVideo(this.form.value.name, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
+    this.VideoService.addVideo(this.form.value.name,this.form.value.airCraft, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           console.log('Request has been made!');

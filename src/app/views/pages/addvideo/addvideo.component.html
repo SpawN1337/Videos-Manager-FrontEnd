@@ -1,48 +1,62 @@
-<c-container>
-  <c-row class="justify-content-center">
-    <c-col md="8">
-<div class="container ">
-  <div class="row " dir="rtl">
+<div class="bg-light min-vh-100 flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-12">
+          <div class="card-header text-center">
+          إضافة فيديو </div>
+          <c-card-body class="p-4">
+          <form [formGroup]="form" (submit)="onSubmit()">
+           
+            
+            <!-- Name -->
+            <h5>المفاتيح</h5>
+            <div class="form-group input-group-lg">
+              <input class="form-control" placeholder="العنوان" formControlName="name">
+            </div>
+            <!-- aircraft -->
+            <div class="form-group">
+              <h5>الوسيلة الجوية</h5>
+              <select ng-model="selectedItem" class="form-control" placeholder=">الوسيلة الجوية" autocomplete=">الوسيلة الجوية"
+                formControlName="aircraft" required>
+                <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}</option>
+              </select>
+            </div>
+            <!-- tags -->
+            <div>
+              <h5>المفاتيح</h5>
+              <tag-input formControlName="tags" [editable]="true" (onTagEdited)="onTagEdited($event)">
+              </tag-input>
+            </div>
+            <br>
+            <!-- Image Preview -->
+            <div class="form-group">
+              <div class="videoData" *ngIf="videoData">
+                <img [src]="videoData" [alt]="form.value.name" width="280">
+              </div>
+            </div>
+            <!-- File Input -->
+            <div class="form-group">
+              <input type="file" (change)="onFileSelect($event)">
+            </div>
+            <br>
+            <!-- Progress Bar -->
+            <div class="progress form-group" *ngIf="percentDone">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                [style.width.%]="percentDone">
+              </div>
+            </div>
+            <!-- Submit -->
+            <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة فيديو</button>
+            </div>
 
-    <form [formGroup]="form" (submit)="onSubmit()">
-      <br>
+          </form>
 
-      <!-- Name -->
-      <div class="form-group input-group-lg">
-        <input class="form-control" placeholder="العنوان" formControlName="name">
-      </div>
-      <div>
-        <h3>المفاتيح</h3>
-        <tag-input formControlName="tags"  [editable]="true" (onTagEdited)="onTagEdited($event)">
-        </tag-input>
-      </div>
-
-
-      <!-- Image Preview -->
-      <div class="form-group">
-        <div class="videoData" *ngIf="videoData">
-          <img [src]="videoData" [alt]="form.value.name" width="280">
-        </div>
-      </div>
-      <!-- File Input -->
-      <div class="form-group">
-        <input type="file" (change)="onFileSelect($event)">
-      </div>
-      <br>
-      <!-- Progress Bar -->
-      <div class="progress form-group" *ngIf="percentDone">
-        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="percentDone">
-        </div>
-      </div>
-      <!-- Submit -->
-      <div class="form-group">
-        <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة صورة للشبكات</button>
-      </div>
-
-    </form>
-
-  </div>
-</div>
-</c-col>
-</c-row>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
 </c-container>
+</div>

@@ -1,34 +1,34 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { catchError, retry } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 
+export interface GradeData {
 
-export interface UserData {
-  firstname: string;
-  lastname: string;
-  grade: string;
-  username: string;
-  password: string;
-  role: string;
+    grade: string,
 }
-
-export interface TableData extends Array<UserData> { }
+export interface TableData extends Array<GradeData> { }
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserService {
+export class GradeService {
   baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
-  users() {
-    return this.httpClient.get<TableData>(`${this.baseUrl}/allusers`).pipe(
+
+  allGrades() {
+    return this.httpClient.get<TableData>(`${this.baseUrl}/allgrades`).pipe(
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError)
     )
+  }
+
+  
+  addGrade(body: any) {
+    return this.httpClient.post(`${this.baseUrl}/addgrade/`, body)
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -46,22 +46,16 @@ export class UserService {
       'Something bad happened; please try again later.');
   }
 
-  removeuser(id: any) {
-    return this.httpClient.delete(`${this.baseUrl}/removeuser/${id}`)
+  removeGrade(id: any) {
+    return this.httpClient.delete(`${this.baseUrl}/removegrade/${id}`)
   }
-  getuser(id: any) {
-    return this.httpClient.get(`${this.baseUrl}/getuser/${id}`).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    )
+  getGrade(id: any) {
+    return this.httpClient.get(`${this.baseUrl}/getgrade/${id}`)
   }
 
-  updateuser(id: any, body: any) {
-    return this.httpClient.put(`${this.baseUrl}/updateuser/${id}`, body)
-
-  }
-  updateadminbase(id: any, body: any) {
-    return this.httpClient.put(`${this.baseUrl}/updateadminbase/${id}`, body)
+  updateGrade(id: any, body: any) {
+    return this.httpClient.put(`${this.baseUrl}/updategrade/${id}`, body)
 
   }
 }
+

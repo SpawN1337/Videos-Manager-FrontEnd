@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidationService } from '../../../validators/validation.service';
+import { GradeService } from '../../../services/grade.service';
 
 /** passwords must match - custom validator */
 export class CustomValidators {
@@ -26,10 +27,12 @@ export class CustomValidators {
 export class UpdateUserComponent implements OnInit {
   submitted = false;
   id: any;
+  myGrade: any;
   formErrors: any
   userForm: FormGroup = new FormGroup({});;
   constructor(private activatetRoute: ActivatedRoute,
     private toasterService: ToastrService,
+    private gradeservice: GradeService,
     private router: Router,
     private usersService: UserService,public vf: ValidationService
     ) {
@@ -37,11 +40,12 @@ export class UpdateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.allGrades()
     this.userForm = new FormGroup({
-      base: new FormControl('', [Validators.required]),
+      grade: new FormControl('', [Validators.required]),
       firstname: new FormControl('', [Validators.required]),
       lastname: new FormControl('', Validators.required),
-      username: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(this.vf.formRules.passwordMin), Validators.pattern(this.vf.formRules.passwordPattern)]),
       confirmPassword: new FormControl(''),
       role: new FormControl('', Validators.required),
@@ -61,6 +65,16 @@ export class UpdateUserComponent implements OnInit {
     );
   }
   get f() { return this.userForm.controls; }
+
+  allGrades() {
+    this.gradeservice.allGrades().subscribe((response: any) => {
+      this.myGrade = response
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
   updateuser() {
 

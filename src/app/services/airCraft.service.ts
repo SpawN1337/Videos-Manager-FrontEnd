@@ -1,34 +1,34 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { catchError, retry } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 
+export interface AirCraftData {
 
-export interface UserData {
-  firstname: string;
-  lastname: string;
-  grade: string;
-  username: string;
-  password: string;
-  role: string;
+    airCraft: string,
 }
-
-export interface TableData extends Array<UserData> { }
+export interface TableData extends Array<AirCraftData> { }
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserService {
+export class AirCraftService {
   baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
-  users() {
-    return this.httpClient.get<TableData>(`${this.baseUrl}/allusers`).pipe(
+
+  allAirCrafts() {
+    return this.httpClient.get<TableData>(`${this.baseUrl}/allairCrafts`).pipe(
       retry(3), // retry a failed request up to 3 times
       catchError(this.handleError)
     )
+  }
+
+  
+  addAirCraft(body: any) {
+    return this.httpClient.post(`${this.baseUrl}/addairCraft/`, body)
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -46,22 +46,16 @@ export class UserService {
       'Something bad happened; please try again later.');
   }
 
-  removeuser(id: any) {
-    return this.httpClient.delete(`${this.baseUrl}/removeuser/${id}`)
+  removeAirCraft(id: any) {
+    return this.httpClient.delete(`${this.baseUrl}/removeairCraft/${id}`)
   }
-  getuser(id: any) {
-    return this.httpClient.get(`${this.baseUrl}/getuser/${id}`).pipe(
-      retry(3), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    )
+  getAirCraft(id: any) {
+    return this.httpClient.get(`${this.baseUrl}/getairCraft/${id}`)
   }
 
-  updateuser(id: any, body: any) {
-    return this.httpClient.put(`${this.baseUrl}/updateuser/${id}`, body)
-
-  }
-  updateadminbase(id: any, body: any) {
-    return this.httpClient.put(`${this.baseUrl}/updateadminbase/${id}`, body)
+  updateAirCraft(id: any, body: any) {
+    return this.httpClient.put(`${this.baseUrl}/updateairCraft/${id}`, body)
 
   }
 }
+

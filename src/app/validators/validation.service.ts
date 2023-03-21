@@ -19,6 +19,7 @@ export class ValidationService {
     firstName: '',
     lastName: '',
     username: '',
+    grade: '',
     password: '',
     confirmPassword: '',
     role: '',
