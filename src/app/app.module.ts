@@ -53,7 +53,8 @@ import { UpdateUserComponent } from './views/pages/update-user/update-user.compo
 import { AddvideoComponent } from './views/pages/addvideo/addvideo.component';
 import { TagInputModule } from 'ngx-chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -67,6 +68,8 @@ const APP_CONTAINERS = [
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, AddvideoComponent,],
   imports: [
+    MatInputModule,
+    MatFormFieldModule,
     MatAutocompleteModule,
     TagInputModule,
     BrowserModule,

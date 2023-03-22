@@ -15,28 +15,20 @@
               <!-- aircraft -->
               <div class="form-group">
                 <h5>الوسيلة الجوية</h5>
-                <select ng-model="selectedItem" class="form-control" placeholder=">الوسيلة الجوية"
-                  autocomplete=">الوسيلة الجوية" formControlName="aircraft" required>
+                <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية"
+                  autocomplete="الوسيلة الجوية" formControlName="aircraft" required>
                   <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
                   </option>
                 </select>
               </div>
               <!-- place -->
-              <h5>المكان</h5>
-              <!-- <mat-form-field class="example-full-width" appearance="fill"> -->
-                <!-- <mat-label>Number</mat-label> -->
-                <input type="text"
-                       placeholder="Pick one"
-                       aria-label="Number"
-                       matInput
-                       [formControl]="myControl"
-                       [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-              <!-- </mat-form-field> -->
+              <div class="form-group">
+                <h5>المكان</h5>
+                <input type="text" class="form-control" formControlName="place" id="userIdFirstWay" list="dynmicUserIds" />
+                <datalist id="dynmicUserIds">
+                  <option *ngFor="let item of myAirCrafts" [value]="item.nomAirCraft">{{item.nomAirCraft}}</option>
+                </datalist>
+              </div>
               <!-- date -->
               <h5>التاريخ</h5>
               <input id="date" type="date" class="form-control" formControlName="date" />
