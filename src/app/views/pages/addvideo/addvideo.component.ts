@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AirCraftService } from '../../../services/airCraft.service';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-addvideo',
   templateUrl: './addvideo.component.html',
@@ -18,9 +20,11 @@ export class AddvideoComponent implements OnInit {
   myAirCrafts: any;
   formErrors: any;
   videoData: string;
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
   percentDone: any = 0;
   // items: any;
-
+  myControl = new FormControl('');
   inputText = 'text';
 
   constructor(private VideoService: VideoService,
@@ -32,17 +36,27 @@ export class AddvideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
     this.allAirCrafts()
     this.form = new FormGroup({
       aircraft: new FormControl(null),
       name: new FormControl(null),
+      place: new FormControl(null),
+      date: new FormControl(null),
       tags: new FormControl(null),
       video: new FormControl(null),
     });
   }
   get f() { return this.form.controls; }
 
-  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
   allAirCrafts() {
     this.AirCraftService.allAirCrafts().subscribe((response: any) => {
       this.myAirCrafts = response
