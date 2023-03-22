@@ -7,10 +7,8 @@
           إضافة فيديو </div>
           <c-card-body class="p-4">
           <form [formGroup]="form" (submit)="onSubmit()">
-           
-            
             <!-- Name -->
-            <h5>المفاتيح</h5>
+            <h5>العنوان</h5>
             <div class="form-group input-group-lg">
               <input class="form-control" placeholder="العنوان" formControlName="name">
             </div>
@@ -22,6 +20,16 @@
                 <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}</option>
               </select>
             </div>
+            <!-- place -->
+            <h5>المكان</h5>
+
+            <!-- date -->
+            <h5>التاريخ</h5>
+            <input
+            id="requestdate" 
+            type="date" 
+            class="form-control" 
+            formControlName="requestdate" />
             <!-- tags -->
             <div>
               <h5>المفاتيح</h5>
