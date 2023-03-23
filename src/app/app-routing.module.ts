@@ -9,6 +9,7 @@ import { RegisterComponent } from './views/pages/register/register.component';
 import { ListUserComponent } from './views/pages/list-user/list-user.component';
 import { UpdateUserComponent } from './views/pages/update-user/update-user.component';
 import { AddvideoComponent } from './views/pages/addvideo/addvideo.component';
+import { ListVideoComponent } from './views/pages/list-video/list-video.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     },
     children: [
       {path: 'register',component: RegisterComponent}, 
+      {path: 'videos',component: ListVideoComponent}, 
       {path: 'addvideo',component: AddvideoComponent}, 
       {path: 'users',component: ListUserComponent}, 
       {path: 'updateUser/:id',component: UpdateUserComponent}, 

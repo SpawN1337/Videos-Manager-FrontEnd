@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule1 } from 'src/app/shared/shared.module';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
+import { ListVideoComponent } from './list-video/list-video.component';
 @NgModule({
   declarations: [
     UpdateUserComponent,
@@ -20,6 +21,7 @@ import { ListUserComponent } from './list-user/list-user.component';
     RegisterComponent,
     Page404Component,
     Page500Component,
+    ListVideoComponent,
   ],
   imports: [
     CommonModule,

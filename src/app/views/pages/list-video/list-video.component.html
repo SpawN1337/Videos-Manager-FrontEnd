@@ -1,0 +1,67 @@
+<div class="animated fadeIn text-center " dir="rtl">
+    <div class="card">
+        <div class="card-header">
+            قائمة الفيديوهات
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">
+                            العنوان
+                        </th>
+                        <th style="width: 10%">
+                            الوسلة الجوية
+                        </th>
+                        <th style="width: 10%">
+                            المكان
+                        </th>
+                        <th style="width: 10%">
+                            التاريخ
+                        </th>
+                        <th style="width: 10%">
+                            المفاتيح
+                        </th>
+                        <th style="width: 15%">
+                            مشاهدة
+                        </th>
+                        <th style="width: 15%">
+                            حذف
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{item.name}}</td>
+                        <td>{{item.aircraft}}</td>
+                        <td>{{item.place}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.tag}}</td>
+                        <td>
+                            <button type="button" [routerLink]="['/updateUser',item._id]" class="btn btn-info">مشاهدة<svg
+                                    cIcon name="cil-settings" size="lg"></svg>
+                            </button> &nbsp;
+                            
+                        </td>
+                        <td>
+                            <button type="button" [routerLink]="['/updateUser',item._id]" class="btn btn-danger">حذف<svg
+                                    cIcon name="cil-settings" size="lg"></svg>
+                            </button> &nbsp;
+                            <!-- <button class="btn btn-danger" (click)="onDelete(item._id)">حذف<svg cIcon name="cil-trash"
+                                    size="lg"></svg>
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="float-right">
+                <button type="button" [routerLink]="['/addvideo']" class="btn btn-success"> إضافة فيديو<svg cIcon
+                        name="cil-user-follow" size="lg"></svg>
+                </button>
+            </div>
+        </div>
+    </div>

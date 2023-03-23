@@ -8,6 +8,8 @@ import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 
+
+
 @Injectable({
   providedIn: "root",
 })
@@ -56,7 +58,7 @@ export class  VideoService {
     return this.videos$.asObservable();
   }
 
-  addVideo(name: string,aircraft: string,place: string,date: string,tag: string[],video: File): Observable<any> {
+  addVideo(name: string,aircraft: string,place: string,date: string,tag: any[],video: File): Observable<any> {
     var videoData: any = new FormData();
     videoData.append("name", name);
     videoData.append("aircraft", aircraft);

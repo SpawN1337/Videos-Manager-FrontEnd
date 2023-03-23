@@ -19,11 +19,11 @@ export class ListUserComponent implements OnInit {
         setTimeout(() => {
           this.data = [...data];
         }, 1000);
+        console.log("rataa",data)
       }, // success path
-
       error => this.error = error // error path
-
-    );
+      
+      );
   }
 
 
