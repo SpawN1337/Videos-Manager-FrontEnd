@@ -24,7 +24,8 @@
               <!-- place -->
               <div class="form-group">
                 <h5>المكان</h5>
-                <input type="text" class="form-control" formControlName="place" id="userIdFirstWay" list="dynmicUserIds" />
+                <input type="text" class="form-control" formControlName="place" id="userIdFirstWay"
+                  list="dynmicUserIds" />
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of myAirCrafts" [value]="item.nomAirCraft">{{item.nomAirCraft}}</option>
                 </datalist>
@@ -39,12 +40,6 @@
                 </tag-input>
               </div>
               <br>
-              <!-- Image Preview -->
-              <div class="form-group">
-                <div class="videoData" *ngIf="videoData">
-                  <img [src]="videoData" [alt]="form.value.name" width="280">
-                </div>
-              </div>
               <!-- File Input -->
               <div class="form-group">
                 <input type="file" (change)="onFileSelect($event)">

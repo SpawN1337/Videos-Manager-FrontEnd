@@ -52,9 +52,10 @@ import { ListUserComponent } from './views/pages/list-user/list-user.component';
 import { UpdateUserComponent } from './views/pages/update-user/update-user.component';
 import { AddvideoComponent } from './views/pages/addvideo/addvideo.component';
 import { TagInputModule } from 'ngx-chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -68,9 +69,10 @@ const APP_CONTAINERS = [
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, AddvideoComponent,],
   imports: [
-    MatInputModule,
-    MatFormFieldModule,
-    MatAutocompleteModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
     TagInputModule,
     BrowserModule,
     AppRoutingModule,

@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AirCraftService } from '../../../services/airCraft.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 @Component({
   selector: 'app-addvideo',
   templateUrl: './addvideo.component.html',
@@ -95,7 +93,7 @@ export class AddvideoComponent implements OnInit {
         case HttpEventType.Response:
           console.log('Video successfully created!', event.body);
           this.percentDone = false;
-          this.router.navigate(['users']);
+          this.router.navigate(['videos']);
           this.toasterService.success('تمت الإضافة بنجاح');
 
       }

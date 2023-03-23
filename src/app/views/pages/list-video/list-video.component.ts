@@ -9,8 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./list-video.component.scss']
 })
 export class ListVideoComponent {
-  // videos: Video[] = [];
-  private imageSubscription: Subscription;
   public items: any;
   constructor(private videoService: VideoService, private httpClient: HttpClient) { }
 
@@ -25,12 +23,8 @@ export class ListVideoComponent {
         return this.items
       },
     );
-    // this.imageSubscription = this.videoService
-    //   .getImagesStream()
-    //   .subscribe((images: Image[]) => {
-    //     this.images = images;
-    //   });
   }
+  
   onDelete(id: number) {
     var result = confirm("هل تريد القيام بعملية الحذف ؟");
     if (result == true) {
@@ -44,7 +38,7 @@ export class ListVideoComponent {
     }
   }
   ngOnDestroy() {
-    this.imageSubscription.unsubscribe();
+    // this.imageSubscription.unsubscribe();
   }
 
 }

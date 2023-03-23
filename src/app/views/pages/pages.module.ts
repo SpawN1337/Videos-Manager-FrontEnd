@@ -13,6 +13,12 @@ import { SharedModule1 } from 'src/app/shared/shared.module';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { ListVideoComponent } from './list-video/list-video.component';
+import { WatchvideoComponent } from './watchvideo/watchvideo.component';
+
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 @NgModule({
   declarations: [
     UpdateUserComponent,
@@ -22,8 +28,13 @@ import { ListVideoComponent } from './list-video/list-video.component';
     Page404Component,
     Page500Component,
     ListVideoComponent,
+    WatchvideoComponent,
   ],
   imports: [
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
     CommonModule,
     SharedModule1,
     PagesRoutingModule,
