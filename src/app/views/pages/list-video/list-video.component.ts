@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { VideoService } from "../../../services/video.service";
 import { Video } from "../../../models/Video";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-video',
   templateUrl: './list-video.component.html',
@@ -10,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ListVideoComponent {
   public items: any;
-  constructor(private videoService: VideoService, private httpClient: HttpClient) { }
+  constructor(private router :Router,private videoService: VideoService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.videoService.getVideos();
@@ -24,7 +25,15 @@ export class ListVideoComponent {
       },
     );
   }
+  watch(item:any) {
+    // Converts the route into a string that can be used 
+    // with the window.open() function
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/watch/${item}`])
+    );
   
+    window.open(url, '_blank');
+  }
   onDelete(id: number) {
     var result = confirm("هل تريد القيام بعملية الحذف ؟");
     if (result == true) {

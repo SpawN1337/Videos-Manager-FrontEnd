@@ -15,10 +15,13 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
-
+url : string = ""
   constructor(private classToggler: ClassToggleService,private router: Router) {
     super();
+    this.url = this.router.url
+    console.log("gg",this.url)
   }
+  
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);

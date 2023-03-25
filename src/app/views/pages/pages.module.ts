@@ -19,6 +19,7 @@ import {VgCoreModule} from '@videogular/ngx-videogular/core';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { SearchComponent } from './search/search.component';
 @NgModule({
   declarations: [
     UpdateUserComponent,
@@ -29,6 +30,7 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
     Page500Component,
     ListVideoComponent,
     WatchvideoComponent,
+    SearchComponent,
   ],
   imports: [
     VgCoreModule,

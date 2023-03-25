@@ -38,7 +38,7 @@
                         <td>{{item.date}}</td>
                         <td>{{item.tag}}</td>
                         <td>
-                            <button type="button" [routerLink]="['/watch',item._id]" 
+                            <button type="button" (click)="watch(item._id)"   target="_blank"
                                 class="btn btn-info">مشاهدة<svg cIcon name="cil-media-play" size="lg"></svg>
                             </button> &nbsp;
 
