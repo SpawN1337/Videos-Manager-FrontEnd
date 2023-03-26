@@ -1,31 +1,32 @@
-<div class=" d-flex justify-content-evenly align-items-baseline">
+<div class=" d-flex justify-content-evenly align-items-baseline" [formGroup]="form">
 
     <h5>العنوان أو الكلمات المفاتيح:</h5>
-    <input class="form-control" placeholder="العنوان أو الكلمات المفاتيح" formControlName="name" style="width: auto;">
+    <input class="form-control" placeholder="العنوان أو الكلمات المفاتيح" formControlName="words" style="width: auto;">
     <h5>الوسيلة الجوية:</h5>
     <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية" autocomplete="الوسيلة الجوية"
-        formControlName="aircraft" required style="width: auto;">
+        formControlName="aircraft" required style="width:  fit-content;">
         <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
         </option>
     </select>
     <h5> المكان:</h5>
-    <input class="form-control" placeholder="المكان" formControlName="name" style="width: auto;">
+    <input class="form-control" placeholder="المكان" formControlName="place" style="width: auto;">
     <h5>التاريخ:</h5>
     <mat-form-field style="width: 20%;">
         <mat-label>بحث حسب التاريخ</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="Start date">
-            <input matEndDate placeholder="End date">
+            <input formControlName="start" matStartDate placeholder="Start date">
+            <input formControlName="end" matEndDate placeholder="End date">
         </mat-date-range-input>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
 
-    <button class="btn btn-success">بحث&nbsp;<svg cIcon name="cil-magnifying-glass" size="lg"></svg>
+    <button class="btn btn-success" (click)="search()">بحث&nbsp;<svg cIcon name="cil-magnifying-glass" size="lg"></svg>
     </button>
 
 
 </div>
+
 <div class="animated fadeIn text-center " dir="rtl">
     <div class="card">
         <div class="card-header">

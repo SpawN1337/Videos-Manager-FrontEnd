@@ -86,6 +86,10 @@ export class  VideoService {
     return this.http.put(`${this.baseUrl}/updateupload/${id}`, body)
 
   }
+  search(body: any) {
+    return this.http.post(`${this.baseUrl}/search`, body)
+
+  }
 }
 
 
