@@ -14,8 +14,8 @@
     <mat-form-field style="width: 20%;">
         <mat-label>بحث حسب التاريخ</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-            <input formControlName="start" matStartDate placeholder="Start date">
-            <input formControlName="end" matEndDate placeholder="End date">
+            <input formControlName="start"  matStartDate placeholder="Start date">
+            <input formControlName="end"  matEndDate placeholder="End date">
         </mat-date-range-input>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of items">
+                    <tr *ngFor="let item of result">
                         <td>{{item.name}}</td>
                         <td>{{item.aircraft}}</td>
                         <td>{{item.place}}</td>

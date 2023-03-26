@@ -35,12 +35,11 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/ng2-daterangepicker/assets/daterangepicker.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
               "src/scss/styles.scss"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js"],
+            "scripts": [],
             "allowedCommonJsDependencies": [
               "chart.js",
               "@coreui/chartjs/dist/js/coreui-chartjs.js"

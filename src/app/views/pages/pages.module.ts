@@ -118,6 +118,7 @@ import {MatTreeModule} from '@angular/material/tree';
     BrowserAnimationsModule
   ],
   providers: [
+    
   ]
 })
 export class PagesModule {

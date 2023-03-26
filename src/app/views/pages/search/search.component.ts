@@ -12,10 +12,10 @@ import { AirCraftService } from '../../../services/airCraft.service';
 })
 export class SearchComponent {
   public daterange: any = {};
-  myAirCrafts: any;
+  public myAirCrafts: any;
   public items: any;
   form: FormGroup;
-  result: FormGroup;
+  public result: any;
   constructor(private AirCraftService: AirCraftService,private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
   ngOnInit(): void {
     this.allAirCrafts()
@@ -26,14 +26,6 @@ export class SearchComponent {
       start: new FormControl<Date | null>(null),
       end: new FormControl(null),
     });
-    this.videoService.allVideos().subscribe(
-      (res) => {
-        this.items = res
-        
-        this.items = this.items.videos
-        return this.items
-      },
-    );
   }
   search() {
     
@@ -49,8 +41,16 @@ export class SearchComponent {
     if (this.form.value.end == ''){
       this.form.value.end = null
     };
-    console.log('clicked')
-    const addowner = this.videoService.search(this.form.value).subscribe((response: any) => {
+   
+    console.log("by default:", this.form.value.end);
+    // console.log("by UTCString:", this.form.value.end.toUTCString());
+    // console.log("by LocaleString:", this.form.value.end.toLocaleString());
+    // console.log("by LocaleTimeString:", this.form.value.end.toLocaleTimeString());
+
+
+    const search = this.videoService.search(this.form.value).subscribe((response: any) => {
+      this.result = response.videos
+      console.log('clicked',this.result)
     },
       (error: any) => {
         console.log(error);
