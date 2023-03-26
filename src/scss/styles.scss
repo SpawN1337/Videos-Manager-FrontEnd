@@ -4,7 +4,8 @@
 @import 'ngx-toastr/toastr';
 $enable-ltr: false;
 $enable-rtl: true;
-
+@import "node_modules/ng2-daterangepicker/assets/daterangepicker.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 // Import styles with default layout.
 @import "@coreui/coreui/scss/coreui";
 
@@ -23,3 +24,6 @@ $enable-rtl: true;
 
 // If you want to add something do it here
 @import "custom";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

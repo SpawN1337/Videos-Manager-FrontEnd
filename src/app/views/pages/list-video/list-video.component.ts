@@ -26,8 +26,6 @@ export class ListVideoComponent {
     );
   }
   watch(item:any) {
-    // Converts the route into a string that can be used 
-    // with the window.open() function
     const url = this.router.serializeUrl(
       this.router.createUrlTree([`/watch/${item}`])
     );

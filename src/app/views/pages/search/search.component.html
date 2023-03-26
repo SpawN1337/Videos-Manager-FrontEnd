@@ -1,8 +1,92 @@
-<div class="tabbable bg-light">
-    <ul id="myTab" class="nav nav-tabs">
-      <li><a href="#home" data-toggle="tab">Home</a></li>
-      <li><a href="#profile" data-toggle="tab">Profile</a></li>
-      <li><a href="#messages" data-toggle="tab">Messages</a></li>
-      <li><a href="#settings" data-toggle="tab">Settings</a></li>
-    </ul>
+<div class=" d-flex justify-content-evenly align-items-baseline">
+
+    <h5>العنوان أو الكلمات المفاتيح:</h5>
+    <input class="form-control" placeholder="العنوان أو الكلمات المفاتيح" formControlName="name" style="width: auto;">
+    <h5>الوسيلة الجوية:</h5>
+    <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية" autocomplete="الوسيلة الجوية"
+        formControlName="aircraft" required style="width: auto;">
+        <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
+        </option>
+    </select>
+    <h5> المكان:</h5>
+    <input class="form-control" placeholder="المكان" formControlName="name" style="width: auto;">
+    <h5>التاريخ:</h5>
+    <mat-form-field style="width: 20%;">
+        <mat-label>بحث حسب التاريخ</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <button class="btn btn-success">بحث&nbsp;<svg cIcon name="cil-magnifying-glass" size="lg"></svg>
+    </button>
+
+
 </div>
+<div class="animated fadeIn text-center " dir="rtl">
+    <div class="card">
+        <div class="card-header">
+            قائمة الفيديوهات
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">
+                            العنوان
+                        </th>
+                        <th style="width: 10%">
+                            الوسلة الجوية
+                        </th>
+                        <th style="width: 10%">
+                            المكان
+                        </th>
+                        <th style="width: 10%">
+                            التاريخ
+                        </th>
+                        <th style="width: 10%">
+                            المفاتيح
+                        </th>
+                        <th style="width: 15%">
+                            مشاهدة
+                        </th>
+                        <th style="width: 15%">
+                            حذف
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{item.name}}</td>
+                        <td>{{item.aircraft}}</td>
+                        <td>{{item.place}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.tag}}</td>
+                        <td>
+                            <button type="button" (click)="watch(item._id)" target="_blank"
+                                class="btn btn-info">مشاهدة<svg cIcon name="cil-media-play" size="lg"></svg>
+                            </button> &nbsp;
+
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" (click)="onDelete(item._id)">حذف<svg cIcon name="cil-trash"
+                                    size="lg"></svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="float-right">
+                <button type="button" [routerLink]="['/addvideo']" class="btn btn-success"> إضافة فيديو <svg cIcon
+                        name="cil-bookmark" size="lg"></svg>
+                </button>
+            </div>
+        </div>
+    </div>
