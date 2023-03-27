@@ -53,8 +53,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {DataFilterPipe} from '../../pipes/datafilter.pipe'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination'; 
+
 @NgModule({
   declarations: [
+    DataFilterPipe,
     UpdateUserComponent,
     ListUserComponent,
     LoginComponent,
@@ -66,6 +71,8 @@ import {MatTreeModule} from '@angular/material/tree';
     SearchComponent,
   ],
   imports: [
+    NgxPaginationModule,
+    NgbModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

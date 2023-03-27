@@ -1,15 +1,15 @@
 <div class=" d-flex justify-content-evenly align-items-baseline" [formGroup]="form">
 
-    <h5>العنوان أو الكلمات المفاتيح:</h5>
-    <input class="form-control" placeholder="العنوان أو الكلمات المفاتيح" formControlName="words" style="width: auto;">
+    <h5>العنوان، المكان أو الكلمات المفاتيح:</h5>
+    <input class="form-control" placeholder="العنوان، المكان أو الكلمات المفاتيح" formControlName="words" style="width: auto;">
     <h5>الوسيلة الجوية:</h5>
     <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية" autocomplete="الوسيلة الجوية"
         formControlName="aircraft" required style="width:  fit-content;">
         <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
         </option>
     </select>
-    <h5> المكان:</h5>
-    <input class="form-control" placeholder="المكان" formControlName="place" style="width: auto;">
+    <!-- <h5> المكان:</h5>
+    <input class="form-control" placeholder="المكان" formControlName="place" style="width: auto;"> -->
     <h5>التاريخ:</h5>
     <mat-form-field style="width: 20%;">
         <mat-label>بحث حسب التاريخ</mat-label>
@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of result">
+                    <tr *ngFor="let item of result | paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:count}">
                         <td>{{item.name}}</td>
                         <td>{{item.aircraft}}</td>
                         <td>{{item.place}}</td>
@@ -84,6 +84,13 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="mb-3 col-md-4 d-flex justify-content-start">
+                <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+                <select style="height: 75%;" (change)="onTableSizChange($event)" class="form-select-sm">
+                    <option *ngFor="let size of tableSizes">{{size}}</option>
+                </select>
+            </div>
             <div class="float-right">
                 <button type="button" [routerLink]="['/addvideo']" class="btn btn-success"> إضافة فيديو <svg cIcon
                         name="cil-bookmark" size="lg"></svg>

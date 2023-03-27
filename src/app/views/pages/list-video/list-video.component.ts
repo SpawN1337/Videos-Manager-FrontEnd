@@ -10,11 +10,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-video.component.scss']
 })
 export class ListVideoComponent {
-  public items: any;
+  searchText = '';
+  items: any;
+  title: 'pagination'
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [5, 10, 15, 20];
   constructor(private router :Router,private videoService: VideoService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.videoService.getVideos();
+    this.datalist();
+  }
+
+  datalist():void{
     this.videoService.allVideos().subscribe(
       (res) => {
         this.items = res
@@ -24,7 +33,22 @@ export class ListVideoComponent {
         return this.items
       },
     );
+
   }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.datalist();
+
+  }
+
+  onTableSizChange(event: any):void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.datalist();
+
+  }
+
   watch(item:any) {
     const url = this.router.serializeUrl(
       this.router.createUrlTree([`/watch/${item}`])

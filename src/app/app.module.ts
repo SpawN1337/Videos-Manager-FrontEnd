@@ -91,6 +91,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { NgxPaginationModule } from 'ngx-pagination'; 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -104,6 +106,7 @@ const APP_CONTAINERS = [
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, AddvideoComponent,],
   imports: [
+    NgxPaginationModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

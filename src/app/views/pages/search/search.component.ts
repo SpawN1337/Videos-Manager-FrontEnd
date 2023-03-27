@@ -16,6 +16,13 @@ export class SearchComponent {
   public items: any;
   form: FormGroup;
   public result: any;
+
+  title: 'pagination'
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [5, 10, 15, 20];
+
   constructor(private AirCraftService: AirCraftService, private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
   ngOnInit(): void {
     this.allAirCrafts()
@@ -50,11 +57,6 @@ export class SearchComponent {
     };
 
     console.log("by default:",  moment(this.form.value.end).utcOffset(0, true).format() );
-    // console.log("by UTCString:", this.form.value.end.toUTCString());
-    // console.log("by LocaleString:", this.form.value.end.toLocaleString());
-    // console.log("by LocaleTimeString:", this.form.value.end.toLocaleTimeString());
-
-
     const search = this.videoService.search(this.form.value).subscribe((response: any) => {
       this.result = response.videos
       console.log('clicked', this.result)
@@ -63,6 +65,22 @@ export class SearchComponent {
         console.log(error);
       }
     );
+  }
+
+
+  
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.search();
+
+  }
+
+  onTableSizChange(event: any):void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.search();
+
   }
 
   allAirCrafts() {
