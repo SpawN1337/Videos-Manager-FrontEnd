@@ -1,16 +1,8 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
-<ng-container >
+<ng-container>
   <c-container [fluid]="true" dir="rtl">
-    <button
-      toggle="visible"
-      cHeaderToggler
-      [cSidebarToggle]="sidebarId"
-      class="ps-1"
-    >
-      <svg cIcon
-        name="cilMenu"
-        size="lg"
-      ></svg>
+    <button toggle="visible" cHeaderToggler [cSidebarToggle]="sidebarId" class="ps-1">
+      <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
       <c-nav-item>
@@ -20,47 +12,32 @@
       </c-nav-item>
       <c-nav-item>
         <a cNavLink routerLink="/videos" routerLinkActive="active">
-          قائمة الفيديوهات
+          قائمة الوسائل الجوية
         </a>
       </c-nav-item>
-      
+
     </c-header-nav>
 
-    <c-header-nav class="d-none d-lg-flex">
-           
+    <!-- <c-header-nav class="d-none d-lg-flex">
+
       <c-nav-item>
         <a routerLink="/search" cNavLink> بحث &nbsp;
           <svg cIcon name="cilMagnifyingGlass" size="lg"></svg>
         </a>
       </c-nav-item>
-    </c-header-nav>
+    </c-header-nav> -->
     <c-header-nav class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
 
   </c-container>
-  <!-- <c-header-divider *ngIf="url =='/search'"></c-header-divider>
-  <c-container [fluid]="true" *ngIf="url =='/search'">
-    <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
-  </c-container> -->
 </ng-container>
 <!--</c-header>-->
 
-<ng-template #userDropdown >
+<ng-template #userDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <button
-      cButton
-      color=""
-      [caret]="false"
-      cDropdownToggle
-      class="py-0"
-    >
-      <c-avatar
-        cTextColor="primary"
-        shape="rounded-1"
-        size="md"
-        src="./assets/img/avatars/taf.png"
-      >
+    <button cButton color="" [caret]="false" cDropdownToggle class="py-0">
+      <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/taf.png">
       </c-avatar>
     </button>
     <ul cDropdownMenu class="pt-0 pr-5 w-auto">
@@ -82,4 +59,3 @@
     </ul>
   </c-dropdown>
 </ng-template>
-

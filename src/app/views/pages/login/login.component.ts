@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.authservice.login(this.loginForm.value).subscribe((response: any) => {
       this.toastr.success('تم الدخول بنجاح', response.message);
       localStorage.setItem('token', response.token)
-      { this.router.navigate(['/dashboard']); }
+      { this.router.navigate(['/videos']); }
     },
       (error: any) => {
         console.log(error);
