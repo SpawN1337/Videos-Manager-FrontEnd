@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { VideoService } from "../../../services/video.service";
 import { AirCraftService } from '../../../services/airCraft.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
   public daterange: any = {};
@@ -16,7 +16,7 @@ export class SearchComponent {
   public items: any;
   form: FormGroup;
   public result: any;
-  constructor(private AirCraftService: AirCraftService,private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
+  constructor(private AirCraftService: AirCraftService, private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
   ngOnInit(): void {
     this.allAirCrafts()
     this.form = new FormGroup({
@@ -28,21 +28,28 @@ export class SearchComponent {
     });
   }
   search() {
-    
-    if (this.form.value.words == ''){
+    // if system is GMT+0100
+    if (this.form.value.end) {
+      this.form.value.end=moment(this.form.value.end).utcOffset(0, true).format();
+    };
+    if (this.form.value.start) {
+      this.form.value.start=moment(this.form.value.start).utcOffset(0, true).format();
+    };
+    // end if system is GMT+0100
+    if (this.form.value.words == '') {
       this.form.value.words = null
     };
-    if (this.form.value.place == ''){
+    if (this.form.value.place == '') {
       this.form.value.place = null
     };
-    if (this.form.value.start == ''){
+    if (this.form.value.start == '') {
       this.form.value.start = null
     };
-    if (this.form.value.end == ''){
+    if (this.form.value.end == '') {
       this.form.value.end = null
     };
-   
-    console.log("by default:", this.form.value.end);
+
+    console.log("by default:",  moment(this.form.value.end).utcOffset(0, true).format() );
     // console.log("by UTCString:", this.form.value.end.toUTCString());
     // console.log("by LocaleString:", this.form.value.end.toLocaleString());
     // console.log("by LocaleTimeString:", this.form.value.end.toLocaleTimeString());
@@ -50,7 +57,7 @@ export class SearchComponent {
 
     const search = this.videoService.search(this.form.value).subscribe((response: any) => {
       this.result = response.videos
-      console.log('clicked',this.result)
+      console.log('clicked', this.result)
     },
       (error: any) => {
         console.log(error);
