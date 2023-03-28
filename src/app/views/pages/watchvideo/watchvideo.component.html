@@ -6,7 +6,7 @@
         <div class="card-body">
             <vg-player>
                 <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls>
-                    <source src="http://localhost:5000/api/v1/getupload/{{id}}" type="video/mp4">
+                    <source src="{{baseUrl}}/getupload/{{id}}" type="video/mp4">
                 </video>
             </vg-player>
         </div>
