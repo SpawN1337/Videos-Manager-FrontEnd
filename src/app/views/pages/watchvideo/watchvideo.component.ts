@@ -26,10 +26,11 @@ export class WatchvideoComponent {
       console.log(response)
     }
     ,(error) => {
+      if(error.error.message){
       this.toasterService.error( error.error.message,'خطأ', {
         timeOut: 9000,
       });
-      console.log("Error",error.error.message);
+      console.log("Error",error.error.message);}
     }
     );
   }
