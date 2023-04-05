@@ -9,17 +9,20 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
   templateUrl: './default-header.component.html',
 })
 export class DefaultHeaderComponent extends HeaderComponent {
-
+  // id: any
+  
+  id = JSON.parse(atob((localStorage.getItem('token')|| '{}').split('.')[1])).role
+  admin(){
+    if(this.id=='admin'){ return true} else return false
+  }
   @Input() sidebarId: string = "sidebar";
-
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
-url : string = ""
-  constructor(private classToggler: ClassToggleService,private router: Router) {
+  url: string = ""
+  constructor(private classToggler: ClassToggleService, private router: Router) {
     super();
     this.url = this.router.url
-    console.log("gg",this.url)
   }
   
   logout() {

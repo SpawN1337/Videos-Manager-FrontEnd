@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+
 import { VideoService } from "../../../services/video.service";
 import { Video } from "../../../models/Video";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,25 +12,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-video.component.scss']
 })
 export class ListVideoComponent {
+  selectedDate: string;
   searchText = '';
   items: any;
+  currentDate : any
   title: 'pagination'
   page: number = 1;
   count: number = 0;
+  dateForm: FormGroup;
   tableSize: number = 5;
   tableSizes: any = [5, 10, 15, 20];
-  constructor(private router :Router,private videoService: VideoService, private httpClient: HttpClient) { }
+  constructor(
+   
+    private router :Router,private videoService: VideoService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    const today = new Date().toISOString().slice(0, 10);
+    this.dateForm = new FormGroup({
+      date: new FormControl(today)
+    });
     this.datalist();
   }
+  onLeftArrowClick() {
+    const current = new Date(this.dateForm.value.date);
+    const newDate = new Date(current);
+    newDate.setDate(current.getDate() - 1);
+    this.dateForm.patchValue({
+      date: newDate.toISOString().slice(0, 10)
+    });
+  }
 
+  onRightArrowClick() {
+    const current = new Date(this.dateForm.value.date);
+    const newDate = new Date(current);
+    newDate.setDate(current.getDate() + 1);
+    this.dateForm.patchValue({
+      date: newDate.toISOString().slice(0, 10)
+    });
+  }
   datalist():void{
-    this.videoService.allVideos().subscribe(
+    console.log("date",this.dateForm.value.date)
+    this.videoService.dayVideos( this.dateForm.value).subscribe(
       (res) => {
         this.items = res
-        console.log("rataa",this.items.videos
-        )
         this.items =this.items.videos
         return this.items
       },
@@ -71,5 +97,7 @@ export class ListVideoComponent {
   ngOnDestroy() {
     // this.imageSubscription.unsubscribe();
   }
+  //date
+  
 
 }

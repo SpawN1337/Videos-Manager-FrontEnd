@@ -90,6 +90,10 @@ export class  VideoService {
     return this.http.post(`${this.baseUrl}/search`, body)
 
   }
+  dayVideos(body: any) {
+    return this.http.post(`${this.baseUrl}/dayvideos`, body)
+
+  }
 }
 
 
