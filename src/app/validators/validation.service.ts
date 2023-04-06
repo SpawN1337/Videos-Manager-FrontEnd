@@ -17,6 +17,7 @@ export class ValidationService {
 
   formErrors = {
     firstName: '',
+    place: '',
     lastName: '',
     username: '',
     grade: '',
@@ -44,13 +45,13 @@ export class ValidationService {
         email: 'Invalid grade',
       },
       password: {
-        required: 'Password is required',
-        pattern: 'Password must contain: numbers, uppercase and lowercase letters',
-        minLength: `Password must be at least ${this.formRules.passwordMin} characters`
+        requiredd: 'لم يتم إدخال كلمة المرور',
+        pattern: ' كلمة المرور يجب أن تحتوي على : أرقام، أحرف كبيرة وأحرف ',
+        minLength: ` كلمة المرور يجب أن تحتوي على ${this.formRules.passwordMin}   حروف على الاقل  `
       },
       confirmPassword: {
-        required: 'Password confirmation is required',
-        passwordMismatch: 'Passwords must match'
+        required: 'لم يتم عليك تأكيد كلمة المرور',
+        passwordMismatch: 'كلمات المرور غير متطابقة'
       },
       role: {
         required: 'Role confirmation is required',

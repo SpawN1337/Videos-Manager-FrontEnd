@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-// import { ValidationFormsService } from '../../forms/validation-forms/validation-forms.service';
+import { ValidationService } from '../../../validators/validation.service';
 import { Video } from "../../../models/Video";
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -20,21 +20,21 @@ export class AddvideoComponent implements OnInit {
   videoData: string;
   percentDone: any = 0;
   inputText = 'text';
-
+  submitted = false;
   constructor(private VideoService: VideoService,
     private toasterService: ToastrService,
     private AirCraftService: AirCraftService,
-    // public vf: ValidationFormsService,
+    public vf: ValidationService,
     private router: Router,) {
-    // this.formErrors = this.vf.errorMessages;
+    this.formErrors = this.vf.errorMessages;
   }
 
   ngOnInit(): void {
     this.allAirCrafts()
     this.form = new FormGroup({
-      aircraft: new FormControl(null),
+      aircraft: new FormControl('', [Validators.required]),
       name: new FormControl(null),
-      place: new FormControl(null),
+      place: new FormControl('', [Validators.required]),
       date: new FormControl(null),
       tags: new FormControl(null),
       video: new FormControl(null),
@@ -69,6 +69,10 @@ export class AddvideoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return
+    };
     let tag = [];
     if (this.form.value.tags) {
       for (let index = 0; index < this.form.value.tags.length; index++) {

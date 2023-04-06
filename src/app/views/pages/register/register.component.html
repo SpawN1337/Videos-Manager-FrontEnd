@@ -12,9 +12,8 @@
                   [ngClass]="{ 'is-invalid': submitted && f.grade.errors, 'is-valid': f.grade.touched && !f.grade.errors }">
                   <option *ngFor="let grade of myGrade" value="{{grade._id}}">{{grade.grade}}</option>
                 </select>
-
                 <div *ngIf="submitted && f['grade'].errors" class="invalid-feedback">
-                  <div *ngIf="f['grade'].errors['required']">قم باختيار الرتبة</div>
+                  <div *ngIf="f['grade'].errors['required']"> لم يتم إختيار الرتبة</div>
                 </div>
               </div>
               <div class="form-group">
@@ -23,7 +22,7 @@
                   placeholder="الإسم" autocomplete="given-name" required autofocus
                   [ngClass]="{ 'is-invalid': submitted && f.firstname.errors, 'is-valid': f.firstname.touched && !f.firstname.errors }" />
                 <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
-                  <div *ngIf="f['firstname'].errors['required']">First Name is required</div>
+                  <div *ngIf="f['firstname'].errors['required']">لم بتم إدخال الإسم</div>
                 </div>
               </div>
               <div class="form-group">
@@ -32,7 +31,7 @@
                   placeholder="اللقب" autocomplete="family-name" required
                   [ngClass]="{ 'is-invalid': submitted && f.lastname.errors, 'is-valid': f.lastname.touched && !f.lastname.errors }" />
                 <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
-                  <div *ngIf="f['lastname'].errors['required']">Last Name is required</div>
+                  <div *ngIf="f['lastname'].errors['required']">لم يتم إدخال اللقب</div>
                 </div>
               </div>
               <div class="form-group">
@@ -41,7 +40,7 @@
                   autocomplete="username" required
                   [ngClass]="{ 'is-invalid': submitted && f.username.errors, 'is-valid': f.username.touched && !f.username.errors }" />
                 <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                  <div *ngIf="f['username'].errors['required']">Username is required</div>
+                  <div *ngIf="f['username'].errors['required']">لم يتم إدخال إسم المستخدم</div>
                 </div>
               </div>
               
@@ -52,11 +51,12 @@
                   formControlName="role" required
                   [ngClass]="{ 'is-invalid': submitted && f.role.errors, 'is-valid': f.role.touched && !f.role.errors }">
                   <option value=""></option>
-                  <option value="admin">admin</option>
-                  <option value="user">user</option>
+                  <option value="admin">مسير</option>
+                  <option value="operator">مشغل</option>
+                  <option value="user">مستخدم</option>
                 </select>
                 <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
-                  <div *ngIf="f['role'].errors['required']">Role is required</div>
+                  <div *ngIf="f['role'].errors['required']">لم يتم إختيار نوع الحساب</div>
                 </div>
               </div>
               <div class="row">
@@ -66,7 +66,7 @@
                     placeholder="كلمة المرور" autocomplete="new-password" required
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors, 'is-valid': f.password.touched && !f.password.errors }" />
                   <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                    <div *ngIf="f['password'].errors['required']">لم يتم إدخال كلمة المرور</div>
                     <div *ngIf="f['password'].errors['minlength']">{{formErrors.password.minLength}}</div>
                     <div *ngIf="f['password'].errors['pattern']">{{formErrors.password.pattern}}</div>
                   </div>
@@ -75,12 +75,12 @@
                   <label class="col-form-label" for="confirmPassword">تأكيد كلمة المرور</label>
                   <input class="form-control" id="confirmPassword" type="password" formControlName="confirmPassword"
                     placeholder=" تأكيد كلمة المرور" autocomplete="new-password" required
-                    [ngClass]="{ 'is-invalid': submitted && registerForm.errors, 'is-valid': f.confirmPassword.touched && !registerForm.errors }" />
+                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors, 'is-valid': f.confirmPassword.touched && !f.confirmPassword.errors }" />
                   <div *ngIf="submitted && registerForm.errors" class="invalid-feedback">
                     <div *ngIf="passwordMatchError">
                       {{formErrors.confirmPassword.passwordMismatch}}
                     </div>
-                  </div>
+                  </div>  
                 </div>
               </div>
               <br >
@@ -88,9 +88,10 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="accept" formControlName="accept" required
                     [ngClass]="{ 'is-invalid': submitted && f.accept.errors, 'is-valid': !f.accept.errors }" />
-                  <label class="custom-control-label" for="accept">تأكيد</label>
+                    &nbsp;
+                  <label class="custom-control-label" for="accept">تأكيد </label>
                   <div *ngIf="submitted && f['accept'].errors" class="invalid-feedback">
-                    <div *ngIf="f['accept'].errors['required']">You have to accept our Terms and Conditions</div>
+                    <div *ngIf="f['accept'].errors['required']">لم يتم التأكيد</div>
                   </div>
                 </div>
               </div>

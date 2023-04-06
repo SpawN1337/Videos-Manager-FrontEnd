@@ -25,10 +25,14 @@
               <div class="form-group">
                 <h5>المكان</h5>
                 <input type="text" class="form-control" formControlName="place" id="userIdFirstWay"
-                  list="dynmicUserIds" />
+                  list="dynmicUserIds" required
+                  [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['place'].touched && !f['place'].errors }" />
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of myAirCrafts" [value]="item.nomAirCraft">{{item.nomAirCraft}}</option>
                 </datalist>
+              </div>
+              <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
+                <div *ngIf="f['place'].errors['required']">لم بتم إدخال الإسم</div>
               </div>
               <!-- date -->
               <h5>التاريخ</h5>

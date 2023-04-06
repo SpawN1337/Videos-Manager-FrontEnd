@@ -35,7 +35,7 @@ export class RegisterComponent {
     username: new FormControl('', [Validators.required]),
     base: new FormControl(''),
     password: new FormControl('', [Validators.required, Validators.minLength(this.vf.formRules.passwordMin), Validators.pattern(this.vf.formRules.passwordPattern)]),
-    confirmPassword: new FormControl(''),
+    confirmPassword: new FormControl('',[Validators.required]),
     role: new FormControl('', Validators.required),
     accept: new FormControl(false, Validators.requiredTrue)
   },
