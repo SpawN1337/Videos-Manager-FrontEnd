@@ -8,37 +8,55 @@
           <c-card-body class="p-4">
             <form [formGroup]="form" (submit)="onSubmit()">
               <!-- Name -->
-              <h5>العنوان</h5>
-              <div class="form-group input-group-lg">
-                <input class="form-control" placeholder="العنوان" formControlName="name">
+              <div class="form-group">
+                <h5>العنوان</h5>
+                <div class="form-group input-group-lg">
+                  <input class="form-control" placeholder="العنوان" formControlName="name" 
+                  required
+                  [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['name'].touched && !f['name'].errors }">
+                  <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors['required']">لم يتم إختيار العنوان </div>
+                  </div>
+                </div>
               </div>
               <!-- aircraft -->
               <div class="form-group">
                 <h5>الوسيلة الجوية</h5>
                 <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية"
-                  autocomplete="الوسيلة الجوية" formControlName="aircraft" required>
+                  autocomplete="الوسيلة الجوية" formControlName="aircraft" required
+                  [ngClass]="{ 'is-invalid': submitted && f['aircraft'].errors, 'is-valid': f['aircraft'].touched && !f['aircraft'].errors }">
                   <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
                   </option>
                 </select>
+                <div *ngIf="submitted && f['aircraft'].errors" class="invalid-feedback">
+                  <div *ngIf="f['aircraft'].errors['required']">لم يتم إختيارالتاريخ </div>
+                </div>
               </div>
               <!-- place -->
               <div class="form-group">
                 <h5>المكان</h5>
-                <input type="text" class="form-control" formControlName="place" id="userIdFirstWay"
-                  list="dynmicUserIds" required
+                <input type="text" class="form-control" formControlName="place" id="userIdFirstWay" list="dynmicUserIds"
+                  required
                   [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['place'].touched && !f['place'].errors }" />
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of myAirCrafts" [value]="item.nomAirCraft">{{item.nomAirCraft}}</option>
                 </datalist>
+                <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
+                  <div *ngIf="f['place'].errors['required']">لم يتم إختيارالمكان </div>
+                </div>
               </div>
-              <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
-                <div *ngIf="f['place'].errors['required']">لم بتم إدخال الإسم</div>
-              </div>
+              <br>
               <!-- date -->
-              <h5>التاريخ</h5>
-              <input id="date" type="date" class="form-control" formControlName="date" />
+              <div class="form-group">
+                <h5>التاريخ</h5>
+                <input id="date" type="date" class="form-control" formControlName="date" required
+                  [ngClass]="{ 'is-invalid': submitted && f['date'].errors, 'is-valid': f['date'].touched && !f['date'].errors }" />
+                <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['date'].errors['required']">لم يتم إختيارالتاريخ </div>
+                </div>
+              </div>
               <!-- tags -->
-              <div>
+              <div class="form-group">
                 <h5>المفاتيح</h5>
                 <tag-input formControlName="tags" [editable]="true" (onTagEdited)="onTagEdited($event)">
                 </tag-input>
@@ -46,7 +64,11 @@
               <br>
               <!-- File Input -->
               <div class="form-group">
-                <input type="file" (change)="onFileSelect($event)">
+                <input type="file" (change)="onFileSelect($event)" required
+                  [ngClass]="{ 'is-invalid': submitted && f['video'].errors, 'is-valid': f['video'].touched && !f['video'].errors }">
+                <div *ngIf="submitted && f['video'].errors" class="invalid-feedback">
+                  <div *ngIf="f['video'].errors['required']">لم يتم إختيارالتاريخ </div>
+                </div>
               </div>
               <br>
               <!-- Progress Bar -->
@@ -58,7 +80,11 @@
               <!-- Submit -->
               <br>
               <div class="form-group">
-                <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة فيديو</button>
+                <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة فيديو</button> &nbsp;
+                <button class="btn btn-success btn-block btn-lg" type="submit" [disabled]="form.valid">تحقق</button>
+                &nbsp;
+                <button class="btn btn-danger" type="reset" [disabled]="form.pristine && !submitted"
+                  (click)="onReset()">إعادة ضبط</button>
               </div>
 
             </form>

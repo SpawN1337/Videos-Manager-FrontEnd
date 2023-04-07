@@ -33,11 +33,11 @@ export class AddvideoComponent implements OnInit {
     this.allAirCrafts()
     this.form = new FormGroup({
       aircraft: new FormControl('', [Validators.required]),
-      name: new FormControl(null),
+      name: new FormControl('', [Validators.required]),
       place: new FormControl('', [Validators.required]),
-      date: new FormControl(null),
+      date: new FormControl('', [Validators.required]),
       tags: new FormControl(null),
-      video: new FormControl(null),
+      video: new FormControl('', [Validators.required]),
     });
   }
   get f() { return this.form.controls; }
@@ -102,7 +102,12 @@ export class AddvideoComponent implements OnInit {
 
       }
     })
+  }
+  
+  onReset() {
 
+    this.submitted = false;
+    this.form.reset();
 
   }
 }
