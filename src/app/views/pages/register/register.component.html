@@ -97,10 +97,10 @@
               </div>
               <br >
               <div class="form-group">
-                <button class="btn btn-primary" (click)="register()"
+                <button class="btn btn-primary btn-block btn-lg" (click)="register()"
                   [disabled]="registerForm.pristine || registerForm.invalid">تسجيل</button> &nbsp;
-                <button class="btn btn-success col-xs-3" type="submit" [disabled]="registerForm.valid">تحقق</button> &nbsp;
-                <button class="btn btn-danger" type="reset" [disabled]="registerForm.pristine && !submitted"
+                <button class="btn btn-success col-xs-3 btn-block btn-lg" type="submit" [disabled]="registerForm.valid">تحقق</button> &nbsp;
+                <button class="btn btn-danger btn-block btn-lg" type="reset" [disabled]="registerForm.pristine && !submitted"
                   (click)="onReset()">إعادة ضبط</button>
               </div>
             </form>

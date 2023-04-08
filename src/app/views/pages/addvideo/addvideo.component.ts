@@ -36,8 +36,9 @@ export class AddvideoComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       place: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
-      tags: new FormControl(null),
+      tags: new FormControl(null, [Validators.required]),
       video: new FormControl('', [Validators.required]),
+      accept: new FormControl(false, Validators.requiredTrue)
     });
   }
   get f() { return this.form.controls; }

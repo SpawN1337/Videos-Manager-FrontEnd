@@ -13,12 +13,13 @@
                 <div class="form-group input-group-lg">
                   <input class="form-control" placeholder="العنوان" formControlName="name" 
                   required
-                  [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['name'].touched && !f['name'].errors }">
+                  [ngClass]="{ 'is-invalid': submitted && f['name'].errors, 'is-valid': f['name'].touched && !f['name'].errors }">
                   <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
                     <div *ngIf="f['name'].errors['required']">لم يتم إختيار العنوان </div>
                   </div>
                 </div>
               </div>
+              <br>
               <!-- aircraft -->
               <div class="form-group">
                 <h5>الوسيلة الجوية</h5>
@@ -32,6 +33,7 @@
                   <div *ngIf="f['aircraft'].errors['required']">لم يتم إختيارالتاريخ </div>
                 </div>
               </div>
+              <br>
               <!-- place -->
               <div class="form-group">
                 <h5>المكان</h5>
@@ -55,11 +57,16 @@
                   <div *ngIf="f['date'].errors['required']">لم يتم إختيارالتاريخ </div>
                 </div>
               </div>
+              <br>
               <!-- tags -->
               <div class="form-group">
                 <h5>المفاتيح</h5>
-                <tag-input formControlName="tags" [editable]="true" (onTagEdited)="onTagEdited($event)">
+                <tag-input formControlName="tags" [editable]="true" (onTagEdited)="onTagEdited($event)" required
+                [ngClass]="{ 'is-invalid': submitted && f['tags'].errors, 'is-valid': f['tags'].touched && !f['tags'].errors }">
                 </tag-input>
+                <div *ngIf="submitted && f['tags'].errors" class="invalid-feedback">
+                  <div *ngIf="f['tags'].errors['required']">لم يتم إختيار المفاتيح </div>
+                </div>
               </div>
               <br>
               <!-- File Input -->
@@ -77,13 +84,25 @@
                   [style.width.%]="percentDone">
                 </div>
               </div>
+              <!-- accept -->
+              <div class="form-group ">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="accept" formControlName="accept" required
+                    [ngClass]="{ 'is-invalid': submitted && f['accept'].errors, 'is-valid': !f['accept'].errors }" />
+                    &nbsp;
+                  <label class="custom-control-label" for="accept">تأكيد </label>
+                  <div *ngIf="submitted && f['accept'].errors" class="invalid-feedback">
+                    <div *ngIf="f['accept'].errors['required']">لم يتم التأكيد</div>
+                  </div>
+                </div>
+              </div>
               <!-- Submit -->
               <br>
               <div class="form-group">
-                <button type="submit" class="btn btn-danger btn-block btn-lg">إضافة فيديو</button> &nbsp;
+                <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="form.pristine || form.invalid">إضافة فيديو</button> &nbsp;
                 <button class="btn btn-success btn-block btn-lg" type="submit" [disabled]="form.valid">تحقق</button>
                 &nbsp;
-                <button class="btn btn-danger" type="reset" [disabled]="form.pristine && !submitted"
+                <button class="btn btn-danger btn-block btn-lg " type="reset" [disabled]="form.pristine && !submitted"
                   (click)="onReset()">إعادة ضبط</button>
               </div>
 
