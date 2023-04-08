@@ -1,5 +1,6 @@
 import { INavData } from '@coreui/angular';
 
+
 export const navItems: INavData[] = [
   // {
   //   name: 'Dashboard',
@@ -53,3 +54,10 @@ export const navItems: INavData[] = [
   //   ]
   // },
 ];
+if (JSON.parse(atob((localStorage.getItem('token') || '{}').split('.')[1])).role == 'admin' 
+||  JSON.parse(atob((localStorage.getItem('token') || '{}').split('.')[1])).role =='operator')
+{navItems.push({
+  name: 'إضافة فيديو',
+  url: '/addvideo',
+  iconComponent: { name: 'cil-bookmark' }
+})}

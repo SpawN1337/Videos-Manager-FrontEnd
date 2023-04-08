@@ -39,12 +39,12 @@
                 </thead>
                 <tbody>
                     <!-- dataFilter:searchText -->
-                    <tr *ngFor="let item of data | paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:count} | dataFilter:searchText">
+                    <tr *ngFor="let item of data  | paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:count} | dataFilter:searchText ">
                         <td>{{item.grade?.grade}}</td>
                         <td>{{item.firstname}}</td>
                         <td>{{item.lastname}}</td>
                         <td>{{item.username}}</td>
-                        <td>{{item.role}}</td>
+                        <td>{{item.role | role }} </td>
                         <td>
                             <button type="button" [routerLink]="['/updateUser',item._id]" class="btn btn-info">تحيين<svg
                                     cIcon name="cil-settings" size="lg"></svg>

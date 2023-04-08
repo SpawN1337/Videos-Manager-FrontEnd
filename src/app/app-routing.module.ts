@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { HasRoleGuard } from './has-role.guard';
 import { DefaultLayoutComponent } from './containers';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
@@ -20,8 +21,8 @@ const routes: Routes = [
     redirectTo: 'videos',
     pathMatch: 'full'
   },
-  
-  {path: 'login',component: LoginComponent}, 
+
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     canActivate: [AuthGuardGuard],
@@ -35,14 +36,38 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-      {path: 'register',component: RegisterComponent}, 
-      {path: 'videos',component: ListVideoComponent}, 
-      {path: 'search',component: SearchComponent}, 
-      {path: 'watch/:id',component: WatchvideoComponent}, 
-      {path: 'addvideo',component: AddvideoComponent}, 
-      {path: 'users',component: ListUserComponent}, 
-      {path: 'updateUser/:id',component: UpdateUserComponent}, 
-      
+      {
+        path: 'register', component: RegisterComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      { path: 'videos', component: ListVideoComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'watch/:id', component: WatchvideoComponent },
+      {
+        path: 'addvideo', component: AddvideoComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "operator"
+        }
+      },
+      {
+        path: 'users', component: ListUserComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'updateUser/:id', component: UpdateUserComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+
     ],
   },
 

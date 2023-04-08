@@ -34,6 +34,11 @@ export class SearchComponent {
       end: new FormControl(null),
     });
   }
+
+  id = JSON.parse(atob((localStorage.getItem('token') || '{}').split('.')[1])).role
+  add() {
+    if (this.id == 'admin' ||  this.id =='operator') { return true } else return false
+  }
   search() {
     // if system is GMT+0100
     if (this.form.value.end) {

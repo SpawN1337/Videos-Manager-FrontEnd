@@ -78,7 +78,7 @@
                     <option *ngFor="let size of tableSizes">{{size}}</option>
                 </select>
             </div>
-            <div class="float-right">
+            <div class="float-right" *ngIf="add()">
                 <button type="button" [routerLink]="['/addvideo']" class="btn btn-success"> إضافة فيديو <svg cIcon name="cil-bookmark" size="lg"></svg>
                 </button>
             </div>
