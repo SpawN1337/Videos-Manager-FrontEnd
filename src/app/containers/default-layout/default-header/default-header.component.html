@@ -10,11 +10,16 @@
           قائمة المستخدمين
         </a>
       </c-nav-item>
-      <!-- <c-nav-item>
-        <a cNavLink routerLink="/videos" routerLinkActive="active">
+      <c-nav-item *ngIf="admin()">
+        <a cNavLink routerLink="/aircrafts" routerLinkActive="active">
           قائمة الوسائل الجوية
         </a>
-      </c-nav-item> -->
+      </c-nav-item>
+      <c-nav-item *ngIf="admin()">
+        <a cNavLink routerLink="/places" routerLinkActive="active">
+          قائمة الأماكن
+        </a>
+      </c-nav-item>
 
     </c-header-nav>
 

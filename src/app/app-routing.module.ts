@@ -13,6 +13,10 @@ import { AddvideoComponent } from './views/pages/addvideo/addvideo.component';
 import { ListVideoComponent } from './views/pages/list-video/list-video.component';
 import { WatchvideoComponent } from './views/pages/watchvideo/watchvideo.component';
 import { SearchComponent } from './views/pages/search/search.component';
+import { ListAircraftComponent } from './views/pages/list-aircraft/list-aircraft.component';
+import { AddAircraftComponent } from './views/pages/add-aircraft/add-aircraft.component';
+import { UpdateAircraftComponent } from './views/pages/update-aircraft/update-aircraft.component';
+import { ListPlaceComponent } from './views/pages/list-place/list-place.component';
 
 
 const routes: Routes = [
@@ -60,6 +64,48 @@ const routes: Routes = [
           role: "admin"
         }
       },
+      {
+        path: 'aircrafts', component: ListAircraftComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'addaircraft', component: AddAircraftComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'updateaircraft/:id', component: UpdateAircraftComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'places', component: ListPlaceComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'addplace', component: AddvideoComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      // {
+      //   path: 'updateplace/:id', component: upda,
+      //   canActivate: [HasRoleGuard],
+      //   data: {
+      //     role: "admin"
+      //   }
+      // },
       {
         path: 'updateUser/:id', component: UpdateUserComponent,
         canActivate: [HasRoleGuard],

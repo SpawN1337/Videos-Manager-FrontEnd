@@ -1,0 +1,53 @@
+<div class="bg-light min-vh-100 flex-row align-items-center">
+    <div class="">
+        <div class="col-md-12">
+
+            <div class="card-body card">تحيين مستخدم
+                <hr>
+
+                <div class="col-md-6">
+
+                    <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()" class="needs-validation">
+
+                        
+                        <div class="form-group">
+                            <label class="col-form-label" for="nomAirCraft">الإسم</label>
+                            <input class="form-control" id="nomAirCraft" type="text" formControlName="nomAirCraft"
+                                placeholder="الإسم" autocomplete="given-name" required autofocus
+                                [ngClass]="{ 'is-invalid': submitted && f['nomAirCraft'].errors, 'is-valid': f['nomAirCraft'].touched && !f['nomAirCraft'].errors }" />
+                            <div *ngIf="submitted && f['nomAirCraft'].errors" class="invalid-feedback">
+                                <div *ngIf="f['nomAirCraft'].errors['required']">لم يتم إدخال الإسم</div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="accept" formControlName="accept"
+                                    required
+                                    [ngClass]="{ 'is-invalid': submitted && f['accept'].errors, 'is-valid': !f['accept'].errors }" />
+                                &nbsp;
+                                <label class="custom-control-label" for="accept">تأكيد</label>
+                                <div *ngIf="submitted && f['accept'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['accept'].errors['required']">يجب التأكد من جميع المعلومات</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-primary mr-1" (click)="updateaircraft()"
+                                [disabled]="f['accept'].invalid">تسجيل</button> &nbsp;
+                            <button class="btn btn-success mr-1" type="submit" [disabled]="userForm.valid">تحقق</button>
+                            &nbsp;
+                            <button class="btn btn-danger" type="reset" [disabled]="userForm.pristine && !submitted"
+                                (click)="onReset()">إعادة
+                                الضبط</button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

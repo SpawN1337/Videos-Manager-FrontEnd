@@ -56,7 +56,12 @@ import {MatTreeModule} from '@angular/material/tree';
 import {DataFilterPipe} from '../../pipes/datafilter.pipe';
 import {RolePipe} from '../../pipes/role.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AddAircraftComponent } from './add-aircraft/add-aircraft.component';
+import { ListAircraftComponent } from './list-aircraft/list-aircraft.component';
+import { UpdateAircraftComponent } from './update-aircraft/update-aircraft.component';
+import { AddPlaceComponent } from './add-place/add-place.component';
+import { ListPlaceComponent } from './list-place/list-place.component'; 
 
 @NgModule({
   declarations: [
@@ -71,6 +76,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ListVideoComponent,
     WatchvideoComponent,
     SearchComponent,
+    AddAircraftComponent,
+    ListAircraftComponent,
+    UpdateAircraftComponent,
+    AddPlaceComponent,
+    ListPlaceComponent,
   ],
   imports: [
     NgxPaginationModule,

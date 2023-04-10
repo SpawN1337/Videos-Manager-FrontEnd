@@ -21,6 +21,7 @@ export class ValidationService {
     lastName: '',
     username: '',
     grade: '',
+    nomAirCraft: '',
     password: '',
     confirmPassword: '',
     role: '',
@@ -35,6 +36,9 @@ export class ValidationService {
       },
       lastName: {
         required: 'Last name is required',
+      },
+      nomAirCraft: {
+        required: 'nomAirCraft is required',
       },
       username: {
         required: 'Username is required',

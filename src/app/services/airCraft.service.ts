@@ -50,7 +50,7 @@ export class AirCraftService {
     return this.httpClient.delete(`${this.baseUrl}/removeairCraft/${id}`)
   }
   getAirCraft(id: any) {
-    return this.httpClient.get(`${this.baseUrl}/getairCraft/${id}`)
+    return this.httpClient.get(`${this.baseUrl}/getaircraft/${id}`)
   }
 
   updateAirCraft(id: any, body: any) {
