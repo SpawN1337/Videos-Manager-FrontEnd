@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { VideoService } from "../../../services/video.service";
 import { AirCraftService } from '../../../services/airCraft.service';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 @Component({
   selector: 'app-search',
@@ -23,7 +24,7 @@ export class SearchComponent {
   tableSize: number = 5;
   tableSizes: any = [5, 10, 15, 20];
 
-  constructor(private AirCraftService: AirCraftService, private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
+  constructor(private toasterService: ToastrService,private AirCraftService: AirCraftService, private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
   ngOnInit(): void {
     this.allAirCrafts()
     this.form = new FormGroup({
@@ -68,13 +69,11 @@ export class SearchComponent {
     },
       (error: any) => {
         console.log(error);
+        this.toasterService.error( error.error.message,'خطأ');
       }
     );
   }
-
-
   
-
   onTableDataChange(event: any) {
     this.page = event;
     this.search();
@@ -108,10 +107,12 @@ export class SearchComponent {
     var result = confirm("هل تريد القيام بعملية الحذف ؟");
     if (result == true) {
       this.videoService.removeVideo(id).subscribe((response) => {
+        this.toasterService.info( 'تمت عملية الحذف بنجاح');
         this.ngOnInit();
       },
         (error) => {
           console.log(error);
+          this.toasterService.error( error.error.message,'خطأ');
         }
       );
     }

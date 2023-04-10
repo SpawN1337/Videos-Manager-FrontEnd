@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableData, UserService } from '../../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -16,7 +18,7 @@ export class ListUserComponent implements OnInit {
   tableSize: number = 5;
   tableSizes: any = [5, 10, 15, 20];
 
-  constructor(private usersService: UserService) { }
+  constructor(private toasterService: ToastrService,private usersService: UserService) { }
 
   ngOnInit(): void {
     this.datalist()
@@ -44,10 +46,13 @@ export class ListUserComponent implements OnInit {
     var result = confirm("هل تريد القيام بعملية الحذف ؟");
     if (result == true) {
       this.usersService.removeuser(id).subscribe((response) => {
+        this.toasterService.info( 'تمت عملية الحذف بنجاح');
         this.ngOnInit();
       },
         (error) => {
           console.log(error);
+          this.toasterService.error( error.error.message,'خطأ');
+
         }
       );
     }

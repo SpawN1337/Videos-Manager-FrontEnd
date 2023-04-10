@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
 import { VideoService } from "../../../services/video.service";
 import { Video } from "../../../models/Video";
+import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 @Component({
@@ -22,9 +22,7 @@ export class ListVideoComponent {
   dateForm: FormGroup;
   tableSize: number = 5;
   tableSizes: any = [5, 10, 15, 20];
-  constructor(
-
-    private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
+  constructor(private toasterService: ToastrService,private router: Router, private videoService: VideoService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     const today = new Date().toISOString().slice(0, 10);
@@ -61,6 +59,10 @@ export class ListVideoComponent {
         this.items = this.items.videos
         return this.items
       },
+      (error: any) => {
+        this.toasterService.error( error.error.message,'خطأ');
+        console.log(error);
+      }
     );
 
   }
@@ -89,10 +91,12 @@ export class ListVideoComponent {
     var result = confirm("هل تريد القيام بعملية الحذف ؟");
     if (result == true) {
       this.videoService.removeVideo(id).subscribe((response) => {
+        this.toasterService.info( 'تمت عملية الحذف بنجاح');
         this.ngOnInit();
       },
         (error) => {
           console.log(error);
+          this.toasterService.error( error.error.message,'خطأ');
         }
       );
     }

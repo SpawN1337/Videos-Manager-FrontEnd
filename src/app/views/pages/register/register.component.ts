@@ -69,11 +69,11 @@ export class RegisterComponent {
     };
     //with Services
     this.authservice.register(this.registerForm.value).subscribe((response: any) => {
-      this.toasterService.success('Success Login', response.message);
+      this.toasterService.success( response.message);
       this.router.navigate(['/users']);
     },
       (error: any) => {
-        this.toasterService.error('Error', error.error.message);
+        this.toasterService.error( error.error.message,'خطأ');
         console.log(error);
       }
     );
