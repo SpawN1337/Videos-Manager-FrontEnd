@@ -51,7 +51,7 @@ export class PlaceService {
     }
 
     getPlace(id: any) {
-        return this.httpClient.get(`${this.baseUrl}/getplac/${id}`)
+        return this.httpClient.get(`${this.baseUrl}/getplace/${id}`)
     }
 
     updatePlace(id: any, body: any) {

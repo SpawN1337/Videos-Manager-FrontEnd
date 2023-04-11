@@ -1,1 +1,57 @@
-<p>list-place works!</p>
+<div class="animated fadeIn text-center " dir="rtl">
+    <div class="card">
+        <div class="card-header">
+            قائمة الأماكن
+        </div>
+        <div class="card-body">
+
+            <div class=" mb-3 col-md-4 d-flex justify-content-start">
+
+                <div class="input-group  ">
+                    <input type="text" #SearchText="ngModel" [(ngModel)]='searchText' class="form-control"
+                        placeholder="بحث. . . . . . . ." />
+                </div>
+            </div>
+
+
+            <table class="table table-striped table-hover table-responsive-lg">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">
+                             المكان
+                        </th>
+                        <th style="width: 20%">
+                            تحيين
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- dataFilter:searchText -->
+                    <tr *ngFor="let item of data  | paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:count} | dataFilter:searchText ">
+                        <td>{{item.place}}</td>
+                        <td>
+                            <button type="button" [routerLink]="['/updateplace',item._id]" class="btn btn-info">تحيين<svg
+                                    cIcon name="cil-settings" size="lg"></svg>
+                            </button> &nbsp;
+                            <button class="btn btn-danger" (click)="onDelete(item._id)">حذف<svg cIcon name="cil-trash"
+                                    size="lg"></svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                  </tfoot>
+            </table>
+            <div class="mb-3 col-md-4 d-flex justify-content-start">
+                <pagination-controls previousLabel="السابق" nextLabel="التالي" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+                <select style="height: 75%;" (change)="onTableSizChange($event)" class="form-select-sm">
+                    <option *ngFor="let size of tableSizes">{{size}}</option>
+                </select>
+            </div>
+            <div class="float-right">
+                <button type="button" [routerLink]="['/addplace']" class="btn btn-success"> إضافة مكان 
+                </button>
+            </div>
+        </div>
+    </div>

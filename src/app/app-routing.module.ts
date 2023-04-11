@@ -17,6 +17,8 @@ import { ListAircraftComponent } from './views/pages/list-aircraft/list-aircraft
 import { AddAircraftComponent } from './views/pages/add-aircraft/add-aircraft.component';
 import { UpdateAircraftComponent } from './views/pages/update-aircraft/update-aircraft.component';
 import { ListPlaceComponent } from './views/pages/list-place/list-place.component';
+import { AddPlaceComponent } from './views/pages/add-place/add-place.component';
+import { UpdatePlaceComponent } from './views/pages/update-place/update-place.component';
 
 
 const routes: Routes = [
@@ -93,7 +95,14 @@ const routes: Routes = [
         }
       },
       {
-        path: 'addplace', component: AddvideoComponent,
+        path: 'addplace', component: AddPlaceComponent,
+        canActivate: [HasRoleGuard],
+        data: {
+          role: "admin"
+        }
+      },
+      {
+        path: 'updateplace/:id', component: UpdatePlaceComponent,
         canActivate: [HasRoleGuard],
         data: {
           role: "admin"

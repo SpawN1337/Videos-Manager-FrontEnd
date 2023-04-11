@@ -61,7 +61,8 @@ import { AddAircraftComponent } from './add-aircraft/add-aircraft.component';
 import { ListAircraftComponent } from './list-aircraft/list-aircraft.component';
 import { UpdateAircraftComponent } from './update-aircraft/update-aircraft.component';
 import { AddPlaceComponent } from './add-place/add-place.component';
-import { ListPlaceComponent } from './list-place/list-place.component'; 
+import { ListPlaceComponent } from './list-place/list-place.component';
+import { UpdatePlaceComponent } from './update-place/update-place.component'; 
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ListPlaceComponent } from './list-place/list-place.component';
     UpdateAircraftComponent,
     AddPlaceComponent,
     ListPlaceComponent,
+    UpdatePlaceComponent,
   ],
   imports: [
     NgxPaginationModule,

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AirCraftService } from '../../../services/airCraft.service';
+import { PlaceService } from '../../../services/place.service';
 @Component({
   selector: 'app-addvideo',
   templateUrl: './addvideo.component.html',
@@ -15,7 +16,10 @@ import { AirCraftService } from '../../../services/airCraft.service';
 export class AddvideoComponent implements OnInit {
   form: FormGroup;
   video: Video;
+  public fileSize: string;
   myAirCrafts: any;
+  myDisks: any;
+  myplaces: any;
   formErrors: any;
   videoData: string;
   percentDone: any = 0;
@@ -24,6 +28,7 @@ export class AddvideoComponent implements OnInit {
   constructor(private VideoService: VideoService,
     private toasterService: ToastrService,
     private AirCraftService: AirCraftService,
+    private PlaceService: PlaceService,
     public vf: ValidationService,
     private router: Router,) {
     this.formErrors = this.vf.errorMessages;
@@ -31,6 +36,8 @@ export class AddvideoComponent implements OnInit {
 
   ngOnInit(): void {
     this.allAirCrafts()
+    this.alldisks()
+    this.allPlacess()
     this.form = new FormGroup({
       aircraft: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -38,6 +45,7 @@ export class AddvideoComponent implements OnInit {
       date: new FormControl('', [Validators.required]),
       tags: new FormControl(null, [Validators.required]),
       video: new FormControl('', [Validators.required]),
+      disk: new FormControl('', [Validators.required]),
       accept: new FormControl(false, Validators.requiredTrue)
     });
   }
@@ -52,13 +60,37 @@ export class AddvideoComponent implements OnInit {
       }
     );
   }
+  allPlacess() {
+    this.PlaceService.allPlaces().subscribe((response: any) => {
+      this.myplaces = response
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+  alldisks() {
+    this.VideoService.disks().subscribe((response: any) => {
+      this.myDisks = response
+    },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
   onFileSelect(event: Event) {
 
     const file = (event.target as HTMLInputElement)?.files?.[0];
     this.form.patchValue({ video: file });
     const allowedMimeTypes = ['video/mp4', 'video/mpeg ', 'video/3gpp'];
     if (file && allowedMimeTypes.includes(file.type)) {
-      const reader = new FileReader();
+      const fileSizeInBytes = file.size;
+      const fileSizeInGB = fileSizeInBytes / (1024 * 1024 * 1024);
+      const fileSizeInMB = fileSizeInBytes / (1024 * 1024 );
+      this.fileSize = fileSizeInGB.toFixed(3) + ' GB';
+      console.log('Selected file size: ' + fileSizeInGB.toFixed(3) + ' GB'); // Display the size of the selected file in GB
+      console.log('Selected file size: ' + fileSizeInMB.toFixed(3) + ' MB'); // Display the size of the selected file in GB
+            const reader = new FileReader();
       reader.onload = () => {
         this.videoData = reader.result as string;
       };
@@ -80,7 +112,7 @@ export class AddvideoComponent implements OnInit {
         tag.push(this.form.value.tags[index].value)
       }
     }
-    this.VideoService.addVideo(this.form.value.name, this.form.value.aircraft, this.form.value.place, this.form.value.date, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
+    this.VideoService.addVideo(this.form.value.name, this.form.value.aircraft, this.form.value.place, this.form.value.date,this.form.value.disk, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           console.log('Request has been made!');

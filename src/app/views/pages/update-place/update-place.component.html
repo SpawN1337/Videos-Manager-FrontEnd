@@ -2,7 +2,7 @@
     <div class="">
         <div class="col-md-12">
 
-            <div class="card-body card">تحيين وسيلة جوية
+            <div class="card-body card">تحيين مكان
                 <hr>
 
                 <div class="col-md-6">
@@ -11,12 +11,12 @@
 
                         
                         <div class="form-group">
-                            <label class="col-form-label" for="nomAirCraft">الوسيلة الجوية</label>
-                            <input class="form-control" id="nomAirCraft" type="text" formControlName="nomAirCraft"
-                                placeholder="الوسيلة الجوية" autocomplete="given-name" required autofocus
-                                [ngClass]="{ 'is-invalid': submitted && f['nomAirCraft'].errors, 'is-valid': f['nomAirCraft'].touched && !f['nomAirCraft'].errors }" />
-                            <div *ngIf="submitted && f['nomAirCraft'].errors" class="invalid-feedback">
-                                <div *ngIf="f['nomAirCraft'].errors['required']">لم يتم إدخال الوسيلة الجوية</div>
+                            <label class="col-form-label" for="place">المكان</label>
+                            <input class="form-control" id="place" type="text" formControlName="place"
+                                placeholder="المكان" autocomplete="given-name" required autofocus
+                                [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['place'].touched && !f['place'].errors }" />
+                            <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
+                                <div *ngIf="f['place'].errors['required']">لم يتم إدخال المكان</div>
                             </div>
                         </div>
                         <br>
@@ -34,7 +34,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <button class="btn btn-primary mr-1" (click)="updateaircraft()"
+                            <button class="btn btn-primary mr-1" (click)="updateplace()"
                                 [disabled]="f['accept'].invalid">تحيين الوسيلة الجوية </button> &nbsp;
                             <button class="btn btn-success mr-1" type="submit" [disabled]="userForm.valid">تحقق</button>
                             &nbsp;

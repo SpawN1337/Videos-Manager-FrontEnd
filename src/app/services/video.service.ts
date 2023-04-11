@@ -58,14 +58,15 @@ export class  VideoService {
     return this.videos$.asObservable();
   }
 
-  addVideo(name: string,aircraft: string,place: string,date: string,tag: any[],video: File): Observable<any> {
+  addVideo(name: string,aircraft: string,place: string,date: string,disk: string,tag: any[],video: File): Observable<any> {
     var videoData: any = new FormData();
     videoData.append("name", name);
     videoData.append("aircraft", aircraft);
     videoData.append("place", place);
     videoData.append("date", date);
+    videoData.append("disk", disk);
     videoData.append("tag", tag);
-    videoData.append("video", video, name,aircraft,place,date,tag,);
+    videoData.append("video", video, name,aircraft,place,date,disk,tag,);
 
     return this.http.post<{ video: Video }>(`${this.baseUrl}/upload`, videoData, {
       reportProgress: true,
@@ -92,6 +93,10 @@ export class  VideoService {
   }
   dayVideos(body: any) {
     return this.http.post(`${this.baseUrl}/dayvideos`, body)
+
+  }
+  disks() {
+    return this.http.get(`${this.baseUrl}/disks`)
 
   }
 }

@@ -17,7 +17,6 @@ export class SearchComponent {
   public items: any;
   form: FormGroup;
   public result: any;
-
   title: 'pagination'
   page: number = 1;
   count: number = 0;
@@ -65,7 +64,7 @@ export class SearchComponent {
     console.log("by default:",  moment(this.form.value.end).utcOffset(0, true).format() );
     const search = this.videoService.search(this.form.value).subscribe((response: any) => {
       this.result = response.videos
-      console.log('clicked', this.result)
+      if(this.result.length ==0){this.toasterService.info( 'لم يتم العثور على أي فيديوهات');}
     },
       (error: any) => {
         console.log(error);

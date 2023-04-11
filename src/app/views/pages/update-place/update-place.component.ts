@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl,ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AirCraftService } from '../../../services/airCraft.service';
+import { PlaceService } from '../../../services/place.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidationService } from '../../../validators/validation.service';
 @Component({
-  selector: 'app-update-aircraft',
-  templateUrl: './update-aircraft.component.html',
-  styleUrls: ['./update-aircraft.component.scss']
+  selector: 'app-update-place',
+  templateUrl: './update-place.component.html',
+  styleUrls: ['./update-place.component.scss']
 })
-export class UpdateAircraftComponent {
+export class UpdatePlaceComponent {
 
   submitted = false;
   id: any;
@@ -17,7 +17,7 @@ export class UpdateAircraftComponent {
   userForm: FormGroup = new FormGroup({});;
   constructor(private activatetRoute: ActivatedRoute,
     private toasterService: ToastrService,
-    private airCraftService: AirCraftService,
+    private PlaceService: PlaceService,
     private router: Router,public vf: ValidationService
     ) {
     this.formErrors = this.vf.errorMessages;
@@ -25,14 +25,14 @@ export class UpdateAircraftComponent {
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
-      nomAirCraft: new FormControl('', [Validators.required]),
+      place: new FormControl('', [Validators.required]),
       accept: new FormControl(false, Validators.requiredTrue)
     }, 
     );
 
 
     this.id = this.activatetRoute.snapshot.params['id'];
-    this.airCraftService.getAirCraft(this.id).subscribe((response: any) => {
+    this.PlaceService.getPlace(this.id).subscribe((response: any) => {
       this.userForm.patchValue(response)
     },
       (error) => {
@@ -44,12 +44,12 @@ export class UpdateAircraftComponent {
 
   
 
-  updateaircraft() {
+  updateplace() {
 
     this.submitted = true;
-    this.airCraftService.updateAirCraft(this.id, this.userForm.value).subscribe((response: any) => {
+    this.PlaceService.updatePlace(this.id, this.userForm.value).subscribe((response: any) => {
       this.toasterService.success( 'تم التحيين بنجاح', response.message);
-      this.router.navigate(['aircrafts'])
+      this.router.navigate(['places'])
     },
     (error: any) => {
       this.toasterService.error( 'Error', error.error.message);
@@ -69,4 +69,5 @@ export class UpdateAircraftComponent {
     }
   }
 }
+
 

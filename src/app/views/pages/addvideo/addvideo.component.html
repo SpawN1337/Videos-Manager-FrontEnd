@@ -26,7 +26,7 @@
                 <select ng-model="selectedItem" class="form-control" placeholder="الوسيلة الجوية"
                   autocomplete="الوسيلة الجوية" formControlName="aircraft" required
                   [ngClass]="{ 'is-invalid': submitted && f['aircraft'].errors, 'is-valid': f['aircraft'].touched && !f['aircraft'].errors }">
-                  <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft._id}}">{{aircraft.nomAirCraft}}
+                  <option *ngFor="let aircraft of myAirCrafts" value="{{aircraft.nomAirCraft}}">{{aircraft.nomAirCraft}}
                   </option>
                 </select>
                 <div *ngIf="submitted && f['aircraft'].errors" class="invalid-feedback">
@@ -41,7 +41,7 @@
                   required
                   [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['place'].touched && !f['place'].errors }" />
                 <datalist id="dynmicUserIds">
-                  <option *ngFor="let item of myAirCrafts" [value]="item.nomAirCraft">{{item.nomAirCraft}}</option>
+                  <option *ngFor="let item of myplaces" [value]="item.place">{{item.place}}</option>
                 </datalist>
                 <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
                   <div *ngIf="f['place'].errors['required']">لم يتم إختيارالمكان </div>
@@ -76,14 +76,29 @@
                 <div *ngIf="submitted && f['video'].errors" class="invalid-feedback">
                   <div *ngIf="f['video'].errors['required']">لم يتم إختيارالتاريخ </div>
                 </div>
+                <p *ngIf="fileSize">حجم الفيديو: {{fileSize}}</p>
               </div>
               <br>
+              <!-- disks -->
+              <div class="form-group">
+                <h5>مكان تخزين الفيديو</h5>
+                <select ng-model="selectedItem" class="form-control" 
+                  formControlName="disk" required
+                  [ngClass]="{ 'is-invalid': submitted && f['disk'].errors, 'is-valid': f['disk'].touched && !f['disk'].errors }">
+                  <option *ngFor="let disk of myDisks" value="{{disk.mount}}">القرص : {{disk.mount}}  حجم التخزين المتاح : {{(disk.available / (1024 * 1024 * 1024)).toFixed(3) + ' GB'}}
+                  </option>
+                </select>
+                <div *ngIf="submitted && f['disk'].errors" class="invalid-feedback">
+                  <div *ngIf="f['disk'].errors['required']">لم يتم إختيار مكان تخزين الفيديو </div>
+                </div>
+              </div>
               <!-- Progress Bar -->
               <div class="progress form-group" *ngIf="percentDone">
                 <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
                   [style.width.%]="percentDone">
                 </div>
               </div>
+              <br>
               <!-- accept -->
               <div class="form-group ">
                 <div class="custom-control custom-checkbox">

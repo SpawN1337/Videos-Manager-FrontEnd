@@ -1,1 +1,56 @@
-<p>add-place works!</p>
+<div class="bg-light min-vh-100 flex-row align-items-center">
+    <c-container>
+        <c-row class="justify-content-center">
+            <c-col lg="7" md="9" xl="6">
+                <c-card class="mx-12">
+                    <div class="card-header text-center">
+                        إضافة  مكان </div>
+                    <c-card-body class="p-4">
+                        <form [formGroup]="form" novalidate (submit)="onSubmit()" >
+                            <!-- Name -->
+                            <div class="form-group">
+                                <h5>المكان</h5>
+                                <div class="form-group input-group-lg">
+                                    <input class="form-control" placeholder="المكان"
+                                        formControlName="place" required
+                                        [ngClass]="{ 'is-invalid': submitted && f['place'].errors, 'is-valid': f['place'].touched && !f['place'].errors }">
+                                    <div *ngIf="submitted && f['place'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['place'].errors['required']">لم يتم إدخال المكان
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <!-- accept -->
+                            <div class="form-group ">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="accept"
+                                        formControlName="accept" required
+                                        [ngClass]="{ 'is-invalid': submitted && f['accept'].errors, 'is-valid': !f['accept'].errors }" />
+                                    &nbsp;
+                                    <label class="custom-control-label" for="accept">تأكيد </label>
+                                    <div *ngIf="submitted && f['accept'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['accept'].errors['required']">لم يتم التأكيد</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Submit -->
+                            <br>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                    [disabled]="form.pristine || form.invalid"> إضافة مكان </button> &nbsp;
+                                <button class="btn btn-success btn-block btn-lg" type="submit"
+                                    [disabled]="form.valid">تحقق</button>
+                                &nbsp;
+                                <button class="btn btn-danger btn-block btn-lg " type="reset"
+                                    [disabled]="form.pristine && !submitted" (click)="onReset()">إعادة ضبط</button>
+                            </div>
+
+                        </form>
+
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+    </c-container>
+</div>
