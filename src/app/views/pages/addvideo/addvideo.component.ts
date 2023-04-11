@@ -131,9 +131,13 @@ export class AddvideoComponent implements OnInit {
           console.log('Video successfully created!', event.body);
           this.percentDone = false;
           this.router.navigate(['videos']);
-          this.toasterService.success('تمت الإضافة بنجاح');
+          this.toasterService.success('تمت الإضافة بنجاح',);
 
       }
+    },
+    (error: any) => {
+      this.toasterService.error(error.error.message, 'خطأ');
+      console.log(error);
     })
   }
   
