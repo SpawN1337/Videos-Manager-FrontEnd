@@ -16,7 +16,9 @@ import { PlaceService } from '../../../services/place.service';
 export class AddvideoComponent implements OnInit {
   form: FormGroup;
   video: Video;
+  selectedDisk: any;
   public fileSize: string;
+  public fileSizeBT: any;
   myAirCrafts: any;
   myDisks: any;
   myplaces: any;
@@ -82,15 +84,17 @@ export class AddvideoComponent implements OnInit {
 
     const file = (event.target as HTMLInputElement)?.files?.[0];
     this.form.patchValue({ video: file });
-    const allowedMimeTypes = ['video/mp4', 'video/mpeg ', 'video/3gpp'];
+    this.form.patchValue({ filename: file?.name });
+    const allowedMimeTypes = ['video/mp4', 'video/mpeg', 'video/3gpp'];
     if (file && allowedMimeTypes.includes(file.type)) {
       const fileSizeInBytes = file.size;
       const fileSizeInGB = fileSizeInBytes / (1024 * 1024 * 1024);
-      const fileSizeInMB = fileSizeInBytes / (1024 * 1024 );
+      const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
       this.fileSize = fileSizeInGB.toFixed(3) + ' GB';
+      this.fileSizeBT = file.size;
       console.log('Selected file size: ' + fileSizeInGB.toFixed(3) + ' GB'); // Display the size of the selected file in GB
       console.log('Selected file size: ' + fileSizeInMB.toFixed(3) + ' MB'); // Display the size of the selected file in GB
-            const reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = () => {
         this.videoData = reader.result as string;
       };
@@ -100,7 +104,12 @@ export class AddvideoComponent implements OnInit {
   public onTagEdited(item: any) {
     console.log('tag edited: current value is ' + item);
   }
-
+  mongoObjectId() {
+    var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+    return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
+      return (Math.random() * 16 | 0).toString(16);
+    }).toLowerCase();
+  };
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) {
@@ -112,7 +121,7 @@ export class AddvideoComponent implements OnInit {
         tag.push(this.form.value.tags[index].value)
       }
     }
-    this.VideoService.addVideo(this.form.value.name, this.form.value.aircraft, this.form.value.place, this.form.value.date,this.form.value.disk, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
+    this.VideoService.addVideo(this.form.value.name, this.form.value.aircraft, this.form.value.place, this.form.value.date, this.form.value.disk, tag, this.form.value.video).subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           console.log('Request has been made!');
@@ -135,12 +144,12 @@ export class AddvideoComponent implements OnInit {
 
       }
     },
-    (error: any) => {
-      this.toasterService.error(error.error.message, 'خطأ');
-      console.log(error);
-    })
+      (error: any) => {
+        this.toasterService.error(error.error.message, 'خطأ', { positionClass: 'toast-bottom-right' });
+        console.log("error", error);
+      })
   }
-  
+
   onReset() {
 
     this.submitted = false;

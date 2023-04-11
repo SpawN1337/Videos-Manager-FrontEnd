@@ -83,7 +83,7 @@
               <div class="form-group">
                 <h5>مكان تخزين الفيديو</h5>
                 <select ng-model="selectedItem" class="form-control" 
-                  formControlName="disk" required
+                 formControlName="disk" required
                   [ngClass]="{ 'is-invalid': submitted && f['disk'].errors, 'is-valid': f['disk'].touched && !f['disk'].errors }">
                   <option *ngFor="let disk of myDisks" value="{{disk.mount}}">القرص : {{disk.mount}}  حجم التخزين المتاح : {{(disk.available / (1024 * 1024 * 1024)).toFixed(3) + ' GB'}}
                   </option>

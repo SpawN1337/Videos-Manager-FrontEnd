@@ -107,7 +107,7 @@ export class SearchComponent {
     if (result == true) {
       this.videoService.removeVideo(id).subscribe((response) => {
         this.toasterService.info( 'تمت عملية الحذف بنجاح');
-        this.ngOnInit();
+        this.search();
       },
         (error) => {
           console.log(error);
