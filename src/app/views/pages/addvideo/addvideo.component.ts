@@ -87,13 +87,13 @@ export class AddvideoComponent implements OnInit {
     this.form.patchValue({ filename: file?.name });
     const allowedMimeTypes = ['video/mp4', 'video/mpeg', 'video/3gpp'];
     if (file && allowedMimeTypes.includes(file.type)) {
-      const fileSizeInBytes = file.size;
-      const fileSizeInGB = fileSizeInBytes / (1024 * 1024 * 1024);
-      const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-      this.fileSize = fileSizeInGB.toFixed(3) + ' GB';
-      this.fileSizeBT = file.size;
-      console.log('Selected file size: ' + fileSizeInGB.toFixed(3) + ' GB'); // Display the size of the selected file in GB
-      console.log('Selected file size: ' + fileSizeInMB.toFixed(3) + ' MB'); // Display the size of the selected file in GB
+      // const fileSizeInBytes = file.size;
+      // const fileSizeInGB = fileSizeInBytes / (1024 * 1024 * 1024);
+      // const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+      // this.fileSize = fileSizeInGB.toFixed(3) + ' GB';
+      // this.fileSizeBT = file.size;
+      // console.log('Selected file size: ' + fileSizeInGB.toFixed(3) + ' GB'); // Display the size of the selected file in GB
+      // console.log('Selected file size: ' + fileSizeInMB.toFixed(3) + ' MB'); // Display the size of the selected file in GB
       const reader = new FileReader();
       reader.onload = () => {
         this.videoData = reader.result as string;
